@@ -2,9 +2,19 @@
 
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import RootBackground from '@/components/shared/RootBackground';
-import GlareHover from '@/components/GlareHover';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
+
+// Dynamically import components for better performance
+const RootBackground = dynamic(() => import('@/components/shared/RootBackground'), {
+  ssr: false,
+  loading: () => <div className="fixed inset-0 bg-gradient-to-b from-gray-900 to-black" />
+});
+
+const GlareHover = dynamic(() => import('@/components/GlareHover'), {
+  ssr: false,
+  loading: () => <div className="w-full bg-white/5 border border-white/10 rounded-2xl animate-pulse" />
+});
 
 export default function ServicesPage() {
   const [mounted, setMounted] = useState(false);

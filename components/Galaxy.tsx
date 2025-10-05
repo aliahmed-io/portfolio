@@ -1,5 +1,5 @@
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 
 const vertexShader = `
 attribute vec2 uv;
@@ -188,7 +188,7 @@ interface GalaxyProps {
   transparent?: boolean;
 }
 
-export default function Galaxy({
+const Galaxy = memo(function Galaxy({
   focal = [0.5, 0.5],
   rotation = [1.0, 0.0],
   starSpeed = 0.5,
@@ -212,13 +212,35 @@ export default function Galaxy({
   const smoothMousePos = useRef({ x: 0.5, y: 0.5 });
   const targetMouseActive = useRef(0.0);
   const smoothMouseActive = useRef(0.0);
+  const isVisible = useRef(true);
+  const rafId = useRef<number | null>(null);
 
   useEffect(() => {
     if (!ctnDom.current) return;
     const ctn = ctnDom.current;
+
+    // Intersection Observer for performance optimization
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible.current = entry.isIntersecting;
+        // Pause animation when not visible
+        if (!entry.isIntersecting && rafId.current) {
+          cancelAnimationFrame(rafId.current);
+          rafId.current = null;
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(ctn);
+
     const renderer = new Renderer({
       alpha: transparent,
-      premultipliedAlpha: false
+      premultipliedAlpha: false,
+      powerPreference: 'high-performance',
+      antialias: false, // Disable for better performance
+      stencil: false,
+      depth: false,
     });
     const gl = renderer.gl;
 
@@ -278,10 +300,27 @@ export default function Galaxy({
 
     programHolder.current = program;
     const mesh = new Mesh(gl, { geometry, program });
-    let animateId: number;
+    let lastTime = 0;
+    const targetFPS = 60;
+    const frameInterval = 1000 / targetFPS;
 
     function update(t: number) {
-      animateId = requestAnimationFrame(update);
+      // Only animate if visible
+      if (!isVisible.current) {
+        rafId.current = requestAnimationFrame(update);
+        return;
+      }
+
+      // Throttle to target FPS
+      const deltaTime = t - lastTime;
+      if (deltaTime < frameInterval) {
+        rafId.current = requestAnimationFrame(update);
+        return;
+      }
+
+      lastTime = t - (deltaTime % frameInterval);
+      rafId.current = requestAnimationFrame(update);
+
       if (!disableAnimation) {
         program.uniforms.uTime.value = t * 0.001;
         program.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed) / 10.0;
@@ -299,7 +338,7 @@ export default function Galaxy({
 
       renderer.render({ scene: mesh });
     }
-    animateId = requestAnimationFrame(update);
+    rafId.current = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
 
     function handleMouseMove(e: MouseEvent) {
@@ -321,13 +360,18 @@ export default function Galaxy({
     }
 
     return () => {
-      cancelAnimationFrame(animateId);
+      observer.disconnect();
+      if (rafId.current) {
+        cancelAnimationFrame(rafId.current);
+      }
       window.removeEventListener('resize', resize);
       if (mouseInteraction) {
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('mouseout', handleMouseLeave);
       }
-      ctn.removeChild(gl.canvas);
+      if (ctn.contains(gl.canvas)) {
+        ctn.removeChild(gl.canvas);
+      }
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, [
@@ -350,4 +394,6 @@ export default function Galaxy({
   ]);
 
   return <div ref={ctnDom} className="w-full h-full relative" {...rest} />;
-}
+});
+
+export default Galaxy;

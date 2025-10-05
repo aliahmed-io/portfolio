@@ -1,9 +1,15 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { useEffect, useState } from 'react';
-import RootBackground from '@/components/shared/RootBackground';
+import { useEffect, useState, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
+
+// Dynamically import RootBackground for better performance
+const RootBackground = dynamic(() => import('@/components/shared/RootBackground'), {
+  ssr: false,
+  loading: () => <div className="fixed inset-0 bg-gradient-to-b from-gray-900 to-black" />
+});
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false);
@@ -23,8 +29,10 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Root Background Component */}
-      <RootBackground speed={0.2} rotationSpeed={0.2} density={0.4} glowIntensity={0.08} hueShift={0} />
+      {/* Root Background Component - Lazy loaded */}
+      <Suspense fallback={<div className="fixed inset-0 bg-gradient-to-b from-gray-900 to-black" />}>
+        <RootBackground speed={0.2} rotationSpeed={0.2} density={0.4} glowIntensity={0.08} hueShift={0} />
+      </Suspense>
 
       {/* Main Content */}
       <div className="relative z-10 min-h-screen flex flex-col">

@@ -7,6 +7,9 @@ import NavBar from "../components/shared/NavBar";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 
@@ -52,9 +55,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://beamanalytics.b-cdn.net" />
         <Analytics />
       </head>
-      <body
+      <body suppressHydrationWarning
         className={`text-white antialiased ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined}`}
         style={{ background: 'radial-gradient(ellipse at top, rgba(10,10,10,0.85), #000 60%)' }}
       >

@@ -1,5 +1,5 @@
-import React from 'react';
-import Galaxy from "../Galaxy";
+import React, { memo } from 'react';
+import dynamic from 'next/dynamic';
 
 type RootBackgroundProps = {
   speed?: number;
@@ -9,7 +9,13 @@ type RootBackgroundProps = {
   hueShift?: number;
 };
 
-export default function RootBackground({
+// Dynamically import Galaxy with no SSR for better performance
+const Galaxy = dynamic(() => import('../Galaxy'), {
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-gradient-to-b from-gray-900/50 to-black/50" />
+});
+
+const RootBackground = memo(function RootBackground({
   speed = 0.02,
   rotationSpeed = 0.01,
   density = 0.3,
@@ -32,4 +38,6 @@ export default function RootBackground({
       />
     </div>
   );
-}
+});
+
+export default RootBackground;
