@@ -4,8 +4,9 @@ import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
-import { getAllProjectsData } from '@/lib/projectsData';
+
 import Image from 'next/image';
+import { getAllProjectsData } from '@/lib/projectsData';
 
 // Dynamically import PixelCard for code splitting
 const PixelCard = dynamic(() => import('@/components/PixelCard'), {

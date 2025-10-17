@@ -96,6 +96,7 @@ export default function ServicesPage() {
                       <li>• Integrated CMS</li>
                       <li>• Core e-commerce functionality</li>
                     </ul>
+                    <p className="text-sm text-gray-400 mb-6 font-light"></p>
                   </GlareHover>
                 </motion.div>
 

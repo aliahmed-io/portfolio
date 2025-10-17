@@ -11,27 +11,27 @@ export interface ProjectMetadata {
 
 export const projectsMetadata: Record<string, ProjectMetadata> = {
   'axiom-assistant': {
-    date: 'Dec 2024',
+    date: 'Sep 2025',
     tech: ['Next.js', 'React', 'TypeScript', 'Google Gemini API'],
     color: '#0ea5e9'
   },
   'imaginify': {
-    date: 'Nov 2024',
+    date: 'Aug 2025',
     tech: ['Next.js', 'React', 'TypeScript', 'Cloudinary AI', 'Stripe API'],
     color: '#e11d48'
   },
   'lumen': {
-    date: 'Oct 2024',
+    date: 'may 2025',
     tech: ['Next.js', 'React', 'TypeScript', 'Convex', 'Stream SDK'],
     color: '#eab308'
   },
   'nexus': {
-    date: 'Sep 2024',
+    date: 'june 2025',
     tech: ['Next.js', 'React', 'TypeScript', 'Prisma', 'PostgreSQL'],
     color: '#0ea5e9'
   },
   'revo': {
-    date: 'Aug 2024',
+    date: 'july 2025',
     tech: ['Next.js', 'React', 'Three.js', 'React Three Fiber', 'GSAP'],
     color: '#e11d48'
   }
@@ -55,7 +55,7 @@ export const projectsData: Record<string, {
   'axiom-assistant': {
     title: 'Axiom Assistant: An Intelligent Conversational AI',
     description: 'A lightweight, high-performance AI chatbot built to provide instant, 24/7 customer support and automate business communications.',
-    date: 'Dec 2024',
+    date: 'Sep 2025',
     color: '#0ea5e9',
     link: 'https://axiom-assistant.vercel.app',
     image: '/images/projects/axiom-assistant.svg',
@@ -77,7 +77,7 @@ export const projectsData: Record<string, {
   'imaginify': {
     title: 'Imaginify: AI-Powered SaaS & Digital Asset Management',
     description: 'A complete, production-ready AI SaaS platform for intelligent image manipulation, featuring a credit-based payment system and AI-powered semantic search.',
-    date: 'Nov 2024',
+    date: 'Aug 2025',
     color: '#e11d48',
     link: 'https://artify-ijgxypzob-ali-ahmeds-projects-547e04c0.vercel.app',
     image: '/images/projects/imaginify.png',
@@ -99,7 +99,7 @@ export const projectsData: Record<string, {
   'lumen': {
     title: 'Lumen: A Real-Time Communication Platform',
     description: 'A full-stack, real-time chat and video application demonstrating expertise in building scalable, interactive platforms with modern serverless technologies.',
-    date: 'Oct 2024',
+    date: 'may 2025',
     color: '#eab308',
     link: 'https://lumen-ebon.vercel.app',
     image: '/images/projects/lumen.png',
@@ -121,7 +121,7 @@ export const projectsData: Record<string, {
   'nexus': {
     title: 'Nexus: A Foundational Full-Stack E-commerce Platform',
     description: 'A clean, modern, and high-performance e-commerce platform built from the ground up, featuring a fully integrated, custom-built Content Management System (CMS).',
-    date: 'Sep 2024',
+    date: 'june 2025',
     color: '#0ea5e9',
     link: 'https://nexus-zeta-two-88.vercel.app',
     image: '/images/projects/nexus.png',
@@ -143,7 +143,7 @@ export const projectsData: Record<string, {
   'revo': {
     title: 'Suburbia Skate: An Immersive 3D E-commerce Experience',
     description: 'A full-stack e-commerce site for a premium skateboard brand, featuring a high-fidelity, interactive 3D product viewer to boost conversions.',
-    date: 'Aug 2024',
+    date: 'july 2025',
     color: '#e11d48',
     link: 'https://revoali.netlify.app',
     image: '/images/projects/sunurbia-skate.png',

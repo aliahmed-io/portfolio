@@ -12,7 +12,6 @@ const inter = Inter({
   fallback: ['system-ui', 'arial'],
 });
 
-
 export const metadata: Metadata = {
   title: {
     default: "Ali Ahmed | Specialist Web Developer (Interactive 3D & AI Integration)",
