@@ -46,15 +46,15 @@ export default function ContactPage() {
           <div className="max-w-6xl mx-auto">
             <div className="grid gap-8 md:grid-cols-3">
               {/* Twitter placeholder */}
-              <div className="opacity-60">
-                <SpotlightCard className="h-full bg-white/10 border border-white/15 p-12 text-center rounded-2xl">
+              <a   href="https://x.com/ali_shimi_dev" target="_blank" rel="noopener noreferrer">
+                <SpotlightCard className="h-full bg-white/10 border border-white/15 p-12 text-center rounded-2xl hover:bg-white/15 transition-colors">
                   <div className="mx-auto mb-6 grid place-items-center w-10 h-10 rounded-full border border-white/20 text-gray-300">
                     <FiTwitter />
                   </div>
-                  <div className="text-2xl font-semibold text-gray-500">—</div>
-                  <div className="mt-2 text-sm text-gray-500">Twitter</div>
+                  <div className="text-2xl font-semibold text-white">@ali_shimi_dev</div>
+                  <div className="mt-2 text-sm text-gray-400">Twitter</div>
                 </SpotlightCard>
-              </div>
+              </a>
 
               {/* Email */}
               <a href="mailto:aly.al.shimi@gmail.com" target="_blank" rel="noopener noreferrer">
