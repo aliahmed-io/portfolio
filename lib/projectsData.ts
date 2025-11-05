@@ -10,7 +10,7 @@ export interface ProjectMetadata {
 }
 
 export const projectsMetadata: Record<string, ProjectMetadata> = {
-  'axiom-assistant': {
+  'axion-assistant': {
     date: 'Sep 2025',
     tech: ['Next.js', 'React', 'TypeScript', 'Google Gemini API'],
     color: '#0ea5e9'
@@ -52,15 +52,15 @@ export const projectsData: Record<string, {
   link?: string;
   image?: string;
 }> = {
-  'axiom-assistant': {
-    title: 'Axiom Assistant: An Intelligent Conversational AI',
+  'axion-assistant': {
+    title: 'Axion Assistant: An Intelligent Conversational AI',
     description: 'A lightweight, high-performance AI chatbot built to provide instant, 24/7 customer support and automate business communications.',
     date: 'Sep 2025',
     color: '#0ea5e9',
-    link: 'https://axiom-assistant.vercel.app',
-    image: '/images/projects/axiom-assistant.svg',
+    link: 'https://axiom-nu-eight.vercel.app/',
+    image: '/images/projects/Axion-assistant.png',
     problem: "In today's digital economy, customers expect instant answers. Businesses that rely on traditional support channels like email or phone often struggle with limited availability, high operational costs, and poor customer satisfaction.",
-    solution: "I developed Axiom Assistant, a lightweight, intelligent, and easily integrable chatbot solution. Built on a modern Next.js stack, it leverages Google's Gemini API to provide natural, context-aware, and helpful conversations.",
+    solution: "I developed axion Assistant, a lightweight, intelligent, and easily integrable chatbot solution. Built on a modern Next.js stack, it leverages Google's Gemini API to provide natural, context-aware, and helpful conversations.",
     features: [
       'Advanced Conversational AI: Utilizes the Google Generative AI SDK to understand user intent and provide accurate, relevant responses',
       'Premium User Experience: Clean interface, real-time responses, and a "typing" indicator to feel responsive and alive',

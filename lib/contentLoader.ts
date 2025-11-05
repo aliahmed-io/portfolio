@@ -19,7 +19,7 @@ const projectsDirectory = path.join(process.cwd(), 'content', 'projects');
 
 // Map of project slugs to display metadata
 const projectMetadata: Record<string, { date: string; stars: string; tech: string[]; color: string }> = {
-  'axiom-assistant': {
+  'Axion-assistant': {
     date: 'Dec 2024',
     stars: '29K',
     tech: ['Next.js', 'React', 'TypeScript', 'Google Gemini API'],
