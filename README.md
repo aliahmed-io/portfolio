@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ali Ahmed – Full-Stack Web Developer (AI & 3D Integration)
 
-## Getting Started
+Welcome to my portfolio!  
+I build **high-performance, modern web applications** using the latest technologies — combining full-stack development with interactive 3D design and AI-powered features.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🧠 What I Do
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I specialize in building:
+- **Custom business websites & dashboards** with Next.js, TypeScript, and Tailwind CSS  
+- **AI-powered platforms** (chatbots, smart search, automation workflows)  
+- **3D-interactive experiences** using Three.js and React Three Fiber  
+- **E-commerce and SaaS solutions** with secure payments (Stripe) and authentication (Clerk/NextAuth)  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+My goal is to deliver products that are not only technically solid but also drive real business growth and user engagement.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ⚙️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+**Frontend:** React.js, Next.js, Tailwind CSS, TypeScript  
+**Backend:** Next.js API Routes, Prisma, Convex, REST, GraphQL  
+**Databases:** PostgreSQL, MongoDB  
+**Integrations:** Stripe, Clerk, GetStream, WebSockets  
+**Design:** Figma, shadcn/ui, Three.js, React Three Fiber  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## 🤝 Work With Me
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+I collaborate with brands, startups, and individuals who want to bring ambitious digital ideas to life — whether you need:
+- A **complete website** built from scratch  
+- A **custom feature** integrated into your existing app  
+- A **strategic tech partner** for ongoing development  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Let’s build something exceptional together.  
+📩 Contact me via [Fiverr](https://www.fiverr.com/users/ali_alshimi/seller_dashboard) or [Upwork](https://www.upwork.com/freelancers/~0148f0157538f2d00f?viewMode=1) to discuss your project.
+
+---
+
+## 🧩 Deployment
+
+All projects are optimized and deployed using **Vercel**, ensuring high performance, scalability, and global availability.
