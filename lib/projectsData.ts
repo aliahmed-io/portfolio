@@ -123,7 +123,7 @@ export const projectsData: Record<string, {
     description: 'A clean, modern, and high-performance e-commerce platform built from the ground up, featuring a fully integrated, custom-built Content Management System (CMS).',
     date: 'june 2025',
     color: '#0ea5e9',
-    link: 'https://nexus-zeta-two-88.vercel.app',
+    link: 'https://nexus-xi-eight.vercel.app/',
     image: '/images/projects/nexus.png',
     problem: 'Many small to medium-sized businesses need a professional, custom e-commerce solution but are trapped between restrictive templates and expensive agencies.',
     solution: 'Nexus is a foundational e-commerce platform built from scratch to be fast, scalable, and easy to manage. It features a fully integrated, custom-built CMS giving clients complete control.',

@@ -15,14 +15,14 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: {
     default: "Ali Ahmed | Specialist Web Developer (Interactive 3D & AI Integration)",
-    template: "%s | aliahmed.dev",
+    template: "",
   },
   description: "Specialist developer building immersive 3D e-commerce experiences and custom AI-powered web applications to drive business growth.",
   openGraph: {
-    title: "Ali Ahmed | Specialist Web Developer (Interactive 3D & AI Integration)",
+    title: "Ali Ahmed Portfolio",
     description: "Building high-value digital experiences with a focus on interactive 3D and custom AI solutions.",
-    url: "https://aliahmed.dev",
-    siteName: "aliahmed.dev",
+    url: "https://portfolio-lake-three-68.vercel.app/",
+    siteName: "Portfolio - Ali Ahmed",
     locale: "en-US",
     type: "website",
   },
