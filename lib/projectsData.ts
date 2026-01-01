@@ -12,7 +12,7 @@ export interface ProjectMetadata {
 export const projectsMetadata: Record<string, ProjectMetadata> = {
   'novexa': {
     date: 'Jan 2025',
-    tech: ['Next.js 15', 'Stripe', 'Prisma', 'Gemini AI'],
+    tech: ['Next.js', 'Stripe', 'Prisma', 'Gemini AI'],
     color: '#D4AF37'
   },
   'axion-assistant': {
@@ -82,7 +82,7 @@ export const projectsData: Record<string, {
       'AI integration done responsibly, with logging, constraints, and clear separation between public and admin data.',
       'A sellable system, suitable for licensing, white-label deployment, or exclusive acquisition.',
     ],
-    techStack: ['Next.js 15', 'React 19', 'TypeScript', 'Postgres', 'Prisma', 'Stripe', 'Shippo', 'Redis', 'Kinde', 'Gemini AI', 'Tailwind CSS'],
+    techStack: ['Next.js', 'React', 'TypeScript', 'Postgres', 'Prisma', 'Stripe', 'Shippo', 'Redis', 'Kinde', 'Gemini AI', 'Tailwind CSS'],
   },
   'axion-assistant': {
     title: 'Axion Assistant: An Intelligent Conversational AI',

@@ -20,7 +20,7 @@ export default function ProjectsPage() {
 
   // Load projects data
   const projects = getAllProjectsData();
-  
+
   // Debug: Log projects data
   console.log('Projects data:', projects);
 
@@ -73,18 +73,18 @@ export default function ProjectsPage() {
                   className="group cursor-pointer"
                   onClick={() => router.push(`/projects/${project.id}`)}
                 >
-                  <PixelCard variant="default" className="h-full">
+                  <PixelCard variant={project.id === 'novexa' ? 'gold' : 'default'} className="h-full">
                     <div className="absolute inset-0 p-8 flex flex-col">
                       <div className="flex justify-between items-start mb-6">
                         <div>
                           <div className="text-sm text-gray-500 mb-1 font-light tracking-wider">{project.date}</div>
                         </div>
                       </div>
-                    
+
                       <h3 className="text-xl font-light mb-4 group-hover:text-white transition-colors duration-300">
                         {project.title}
                       </h3>
-                      
+
                       <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light">
                         {project.description}
                       </p>
@@ -104,7 +104,7 @@ export default function ProjectsPage() {
                           </span>
                         )}
                       </div>
-                      
+
                       <div className="text-white/60 text-xs font-light tracking-widest uppercase group-hover:text-white transition-colors duration-300">
                         Read more →
                       </div>

@@ -146,11 +146,18 @@ const VARIANTS = {
     speed: 80,
     colors: '#fecdd3,#fda4af,#e11d48',
     noFocus: true
+  },
+  gold: {
+    activeColor: '#fcd34d',
+    gap: 6,
+    speed: 40,
+    colors: '#D4AF37,#FCD34D,#B45309,#FEF08A',
+    noFocus: false
   }
 };
 
 interface PixelCardProps {
-  variant?: 'default' | 'blue' | 'yellow' | 'pink';
+  variant?: 'default' | 'blue' | 'yellow' | 'pink' | 'gold';
   gap?: number;
   speed?: number;
   colors?: string;
@@ -214,7 +221,7 @@ export default function PixelCard({
         const distance = Math.sqrt(dx * dx + dy * dy);
         const delay = reducedMotion ? 0 : distance;
         // widen the safe area to improve text legibility
-       
+
         if (!ctx) return;
         pxs.push(new Pixel(canvasRef.current, ctx, x, y, color, getEffectiveSpeed(finalSpeed, reducedMotion), delay));
       }
