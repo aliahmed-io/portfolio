@@ -19,6 +19,12 @@ const projectsDirectory = path.join(process.cwd(), 'content', 'projects');
 
 // Map of project slugs to display metadata
 const projectMetadata: Record<string, { date: string; stars: string; tech: string[]; color: string }> = {
+  'novexa': {
+    date: 'Jan 2025',
+    stars: '12K',
+    tech: ['Next.js 15', 'Stripe', 'Prisma', 'Gemini AI'],
+    color: '#D4AF37'
+  },
   'Axion-assistant': {
     date: 'Dec 2024',
     stars: '29K',
@@ -65,7 +71,7 @@ export function getAllProjects(): ProjectContent[] {
       const filePath = path.join(projectsDirectory, filename);
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data, content } = matter(fileContents);
-      
+
       // Normalize slug (handle spaces and special characters)
       const slug = filename.replace('.mdx', '').toLowerCase().replace(/\s+/g, '-');
 
@@ -105,7 +111,7 @@ export function getProjectMetadata(slug: string) {
 export function getProjectPreview(slug: string) {
   const metadata = projectMetadata[slug];
   const project = getProjectBySlug(slug);
-  
+
   if (!metadata || !project) return null;
 
   return {
