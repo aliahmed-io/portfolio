@@ -85,7 +85,7 @@ export default function ProjectsPage() {
                         {project.title}
                       </h3>
 
-                      <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light">
+                      <p className="text-gray-400 text-sm leading-relaxed mb-6 font-light line-clamp-3">
                         {project.description}
                       </p>
 
@@ -105,7 +105,7 @@ export default function ProjectsPage() {
                         )}
                       </div>
 
-                      <div className="text-white/60 text-xs font-light tracking-widest uppercase group-hover:text-white transition-colors duration-300">
+                      <div className="text-white/60 text-xs font-light tracking-widest uppercase group-hover:text-white transition-colors duration-300 mt-auto">
                         Read more →
                       </div>
                     </div>
