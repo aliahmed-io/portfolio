@@ -34,10 +34,10 @@ interface ProjectPageProps {
 export default function ProjectPage({ params }: ProjectPageProps) {
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
-  
+
   // Unwrap params using React.use()
   const { project: projectSlug } = use(params);
-  
+
   // Load project data
   const project = getProjectData(projectSlug);
 
@@ -50,7 +50,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   }
 
   if (!mounted) {
-  return (
+    return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white"></div>
       </div>
@@ -73,26 +73,27 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           rotationSpeed={0.05}
           repulsionStrength={1}
           transparent={true}
-/>
-    </div>
+        />
+      </div>
 
       {/* Page content — Bento-based surface everywhere */}
       <div className="relative z-10 min-h-screen">
         {/* Top padding section */}
         <section className="px-6 py-10">
           <div className="max-w-6xl mx-auto">
-             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-               {/* Hero card with image */}
-               <ParticleCard className="p-0 mb-8 bg-white/10 border border-white/15 rounded-2xl overflow-hidden" particleCount={18} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+              {/* Hero card with image */}
+              <ParticleCard className="p-0 mb-8 bg-white/10 border border-white/15 rounded-2xl overflow-hidden" particleCount={18} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
                 {/* Project Image */}
                 {project.image && (
                   <div className="relative w-full aspect-video bg-gradient-to-b from-gray-900 to-black overflow-hidden">
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover object-center"
-                      onError={(e) => console.error('Image failed to load:', project.image, e)}
-                      onLoad={() => console.log('Image loaded successfully:', project.image)}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   </div>
@@ -149,16 +150,16 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: 'easeOut' }}>
               <div className="grid gap-6 md:grid-cols-4">
                 {/* Problem */}
-                 <div className="md:col-span-2 md:row-span-2">
-                   <ParticleCard className="p-6 h-full bg-white/10 border border-white/15 rounded-2xl" particleCount={12} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
+                <div className="md:col-span-2 md:row-span-2">
+                  <ParticleCard className="p-6 h-full bg-white/10 border border-white/15 rounded-2xl" particleCount={12} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
                     <h3 className="text-2xl font-medium mb-3">The Problem</h3>
                     <p className="text-gray-300 leading-relaxed">{project.problem}</p>
                   </ParticleCard>
                 </div>
 
                 {/* Solution (large) */}
-                 <div className="md:col-span-2 md:row-span-2">
-                   <ParticleCard className="p-6 h-full bg-white/10 border border-white/15 rounded-2xl" particleCount={12} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
+                <div className="md:col-span-2 md:row-span-2">
+                  <ParticleCard className="p-6 h-full bg-white/10 border border-white/15 rounded-2xl" particleCount={12} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
                     <h3 className="text-2xl font-medium mb-3">The Solution</h3>
                     <p className="text-gray-300 leading-relaxed">{project.solution}</p>
                   </ParticleCard>
@@ -175,8 +176,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 ))}
 
                 {/* Tech Stack */}
-                 <div className="md:col-span-2">
-                   <ParticleCard className="p-6 h-full bg-white/10 border border-white/15 rounded-2xl" particleCount={10} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
+                <div className="md:col-span-2">
+                  <ParticleCard className="p-6 h-full bg-white/10 border border-white/15 rounded-2xl" particleCount={10} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
                     <h3 className="text-xl font-medium mb-3">Technology Stack</h3>
                     <div className="flex flex-wrap gap-2">
                       {project.techStack && project.techStack.map((tech) => (
@@ -187,8 +188,8 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 </div>
 
                 {/* Business Impact */}
-                 <div className="md:col-span-2">
-                   <ParticleCard className="p-6 h-full bg-white/10 border border-white/15 rounded-2xl" particleCount={10} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
+                <div className="md:col-span-2">
+                  <ParticleCard className="p-6 h-full bg-white/10 border border-white/15 rounded-2xl" particleCount={10} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
                     <h3 className="text-xl font-medium mb-3">Business Impact</h3>
                     <ul className="space-y-2">
                       {project.impact && project.impact.map((impact, index) => (
@@ -202,7 +203,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </section>
 
-    
+
       </div>
 
       {/* no dock */}

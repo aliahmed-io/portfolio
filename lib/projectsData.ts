@@ -10,6 +10,11 @@ export interface ProjectMetadata {
 }
 
 export const projectsMetadata: Record<string, ProjectMetadata> = {
+  'novexa': {
+    date: 'Jan 2025',
+    tech: ['Next.js 15', 'Stripe', 'Prisma', 'Gemini AI'],
+    color: '#D4AF37'
+  },
   'axion-assistant': {
     date: 'Sep 2025',
     tech: ['Next.js', 'React', 'TypeScript', 'Google Gemini API'],
@@ -52,6 +57,33 @@ export const projectsData: Record<string, {
   link?: string;
   image?: string;
 }> = {
+  'novexa': {
+    title: 'Novexa: Production-Ready AI Commerce Platform',
+    description: 'A full-stack, enterprise-grade e-commerce platform showcasing advanced commerce architecture, operational tooling, and AI-native features built for real-world deployment.',
+    date: 'Jan 2025',
+    color: '#D4AF37',
+    link: 'https://novexa-ten.vercel.app/',
+    image: '/images/projects/novexa.png',
+    problem: 'Most e-commerce projects fail after launch, not before it. Templates focus on visuals, but ignore the operational reality: payments, shipping, returns, inventory integrity, admin workflows, and scale.',
+    solution: 'I built Novexa as a production-ready e-commerce platform, not a demo or UI template. It is designed to be deployed, operated, and sold — either as a licensed product, a white-label foundation, or a custom client solution. Novexa covers the full commerce lifecycle: discovery, checkout, fulfillment, returns, marketing, and operations.',
+    features: [
+      'Complete Storefront Experience: Product catalog, filtering, SEO-ready product pages, reviews, wishlist, and Redis-backed cart.',
+      'Hardened Checkout & Payments: Authenticated checkout, server-verified shipping rates, Stripe webhooks with retry-safe idempotency.',
+      'Shipping & Fulfillment: Live shipping rates, admin label purchasing, and automatic order status updates.',
+      'Returns Workflow: Customer-initiated return requests with full admin approval/rejection tooling.',
+      'Admin Operations Dashboard: Product CRUD, CSV import/export, orders, returns, email marketing, audit logs, and integration health.',
+      'AI-Native Features: AI shopping assistant, AI search & reranking, AI COO admin insights, and AI-assisted email drafting.',
+      'Optional 3D & Try-On Modules: GLB model viewer, Meshy-powered 3D generation, and asynchronous AI try-on workflows.',
+      'Observability & Safety: Rate limiting, Zod validation, audit logs, diagnostics, and health checks for all integrations.',
+    ],
+    impact: [
+      'Production-grade backend engineering (webhooks, payments, shipping, data integrity).',
+      'Operational thinking (returns, fulfillment, diagnostics, admin workflows).',
+      'AI integration done responsibly, with logging, constraints, and clear separation between public and admin data.',
+      'A sellable system, suitable for licensing, white-label deployment, or exclusive acquisition.',
+    ],
+    techStack: ['Next.js 15', 'React 19', 'TypeScript', 'Postgres', 'Prisma', 'Stripe', 'Shippo', 'Redis', 'Kinde', 'Gemini AI', 'Tailwind CSS'],
+  },
   'axion-assistant': {
     title: 'Axion Assistant: An Intelligent Conversational AI',
     description: 'A lightweight, high-performance AI chatbot built to provide instant, 24/7 customer support and automate business communications.',
