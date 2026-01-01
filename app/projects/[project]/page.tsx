@@ -83,7 +83,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               {/* Hero card with image */}
-              <ParticleCard className="p-0 mb-8 bg-white/10 border border-white/15 rounded-2xl overflow-hidden" particleCount={18} glowColor="255,255,255" enableTilt={true} enableMagnetism={true} clickEffect={false}>
+              <ParticleCard className="p-0 mb-8 bg-white/10 border border-white/15 rounded-2xl overflow-hidden" particleCount={0} glowColor="255,255,255" enableTilt={false} enableMagnetism={false} clickEffect={false}>
                 {/* Project Image */}
                 {project.image && (
                   <div className="relative w-full aspect-video bg-gradient-to-b from-gray-900 to-black overflow-hidden">
