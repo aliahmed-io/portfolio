@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllProjectsData } from '@/lib/projectsData';
-import { BsStars, BsCpu, BsPalette, BsArrowRight } from 'react-icons/bs';
+import { BsStars, BsCpu, BsPalette, BsArrowRight, BsCodeSlash } from 'react-icons/bs';
 
 // Dynamically import background
 const Galaxy = dynamic(() => import('@/components/Galaxy'), {
@@ -17,26 +17,35 @@ const Galaxy = dynamic(() => import('@/components/Galaxy'), {
 // Filter categories
 const categories = [
   { id: 'all', label: 'All Projects', icon: null },
+  { id: 'design', label: 'Design', icon: BsPalette },
   { id: 'ai', label: 'AI', icon: BsStars },
   { id: '3d', label: '3D', icon: BsCpu },
-  { id: 'fullstack', label: 'Full-Stack', icon: BsPalette },
+  { id: 'fullstack', label: 'Full-Stack', icon: BsCodeSlash },
 ];
 
 // Map projects to categories
 const projectCategories: Record<string, string[]> = {
-  'novexa': ['ai', '3d', 'fullstack'],
-  'axion-assistant': ['ai', 'fullstack'],
+  'naturo': ['design', '3d'],
+  'vonex': ['design'],
+  'rive-droite': ['design', 'ai'],
+  'vantiq': ['design', '3d'],
+  'maison-lumiere': ['design', '3d'],
+  'lundev-furniture': ['design', '3d'],
+  'artura': ['design', '3d'],
   'imaginify': ['ai', 'fullstack'],
+  'novexa': ['fullstack', 'ai'],
+  'axion-assistant': ['ai', 'fullstack'],
   'lumen': ['fullstack'],
   'nexus': ['fullstack'],
-  'revo': ['3d', 'fullstack'],
+  'revo': ['design', '3d'],
 };
 
 // Category colors
 const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
   'ai': { bg: 'var(--ai-color)', text: 'var(--ai-color)', border: 'var(--ai-color)' },
   '3d': { bg: 'var(--three-d-color)', text: 'var(--three-d-color)', border: 'var(--three-d-color)' },
-  'fullstack': { bg: 'var(--design-color)', text: 'var(--design-color)', border: 'var(--design-color)' },
+  'design': { bg: 'var(--design-color)', text: 'var(--design-color)', border: 'var(--design-color)' },
+  'fullstack': { bg: 'var(--fullstack-color)', text: '#000000', border: 'var(--fullstack-color)' },
 };
 
 interface Project {
@@ -238,8 +247,8 @@ export default function ProjectsPage() {
                     key={cat.id}
                     onClick={() => setActiveFilter(cat.id)}
                     className={`flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-300 ${isActive
-                        ? 'bg-[var(--accent-primary)] text-white'
-                        : 'bg-white/5 text-[var(--text-secondary)] hover:bg-white/10 hover:text-white border border-white/10'
+                      ? 'bg-[var(--accent-primary)] text-white'
+                      : 'bg-white/5 text-[var(--text-secondary)] hover:bg-white/10 hover:text-white border border-white/10'
                       }`}
                   >
                     {Icon && <Icon className="w-4 h-4" />}

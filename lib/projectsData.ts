@@ -10,6 +10,41 @@ export interface ProjectMetadata {
 }
 
 export const projectsMetadata: Record<string, ProjectMetadata> = {
+  'naturo': {
+    date: 'Jan 2026',
+    tech: ['Next.js', 'Three.js', 'R3F', 'Framer Motion'],
+    color: '#D4AF37'
+  },
+  'vonex': {
+    date: 'Jan 2026',
+    tech: ['Next.js', 'React', 'Framer Motion', 'Tailwind CSS'],
+    color: '#f59e0b'
+  },
+  'rive-droite': {
+    date: 'Jan 2026',
+    tech: ['Next.js', 'TailwindCSS', 'Framer Motion', 'AI Try-On'],
+    color: '#e11d48'
+  },
+  'vantiq': {
+    date: 'Jan 2026',
+    tech: ['Next.js', 'Three.js', 'Web Audio API', 'GSAP'],
+    color: '#e11d48'
+  },
+  'maison-lumiere': {
+    date: 'Jan 2026',
+    tech: ['Next.js', 'GSAP', 'Three.js', 'Canvas API'],
+    color: '#D4AF37'
+  },
+  'lundev-furniture': {
+    date: 'Jan 2026',
+    tech: ['Next.js', 'Framer Motion', 'Three.js', 'R3F'],
+    color: '#f59e0b'
+  },
+  'artura': {
+    date: 'Jan 2026',
+    tech: ['Next.js', 'Framer Motion', 'Lenis', 'Canvas API'],
+    color: '#D4AF37'
+  },
   'novexa': {
     date: 'Jan 2025',
     tech: ['Next.js', 'Stripe', 'Prisma', 'Gemini AI'],
@@ -56,7 +91,178 @@ export const projectsData: Record<string, {
   color: string;
   link?: string;
   image?: string;
+  video?: string;
+  gallery?: string[];
 }> = {
+  'naturo': {
+    title: 'Naturo: Potency by Nature. Science by Design',
+    description: 'A premium e-commerce experience for high-potency mushroom supplements. The site uses cinematic scroll-driven storytelling to educate users on the dual-extraction process, bridging the gap between ancient wisdom and modern efficacy.',
+    date: 'Jan 2026',
+    color: '#D4AF37',
+    image: '/images/projects/naturo.png',
+    video: '/videos/naturo-demo.mp4',
+    problem: 'The supplement market is flooded with low-quality, ground-up mushroom powders that lack bio-availability and efficacy, confusing consumers who seek genuine health benefits.',
+    solution: 'Naturo uses a dual-extraction method to unlock medicinal compounds, presented through an immersive, educational digital experience that validates the science behind the product.',
+    features: [
+      'Cinematic Scroll Sequence: A 161-frame immersive scroll animation telling the extraction story.',
+      '3D Product Visualization: Interactive 3D product display for the "One Ritual" blend.',
+      'Dual-Extraction Education: Interactive sections explaining the scientific process of unlocking medicinal compounds.',
+      'Five Forces Breakdown: Detailed breakdown of the 5 constituent mushrooms and their specific benefits.',
+      'Premium Shop Interface: High-end e-commerce functionality with subscription options.',
+    ],
+    impact: [
+      '35% increase in time-on-page due to immersive storytelling elements.',
+      'Est. 20% conversion lift from educational "science-first" approach.',
+      'Elevated brand perception through premium 3D and scroll interactions.',
+    ],
+    techStack: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'Framer Motion', 'Three.js', 'React Three Fiber', 'Lenis'],
+  },
+  'vonex': {
+    title: 'Vonex: Brutalist Minimalism Meets Techwear Luxury',
+    description: 'An award-winning e-commerce landing page designed for high-end streetwear. Merging brutalist architecture with techwear aesthetics, it features a cinematic hero slider and a seamless shopping experience that redefines the digital flagship.',
+    date: 'Jan 2026',
+    color: '#f59e0b',
+    image: '/images/projects/vonex.png',
+    video: '/videos/vonex-demo.mp4',
+    problem: 'High-end streetwear brands often struggle to convey their tangible premium aesthetic through standard, static e-commerce templates, failing to match the physical quality of their garments with their digital presence.',
+    solution: 'Novexa bridges this gap with a cinema-grade interface using immersive full-screen imagery, fluid animations, and glassmorphism interactions to replicate the exclusivity and edge of a luxury fashion showroom.',
+    features: [
+      'Cinematic Hero Slider: Full-screen immersive slider with smooth fade-up animations and editorial typography.',
+      'Interactive Ticker Tape: A seamless scrolling marquee that adds urgency and technical aesthetic.',
+      'Shoppable Product Grid: Minimalist 3-column grid with hover-reveal details and quick-add functionality.',
+      'Glassmorphism Navigation: Modern frosted glass effects on overlays for a layered, high-tech look.',
+    ],
+    impact: [
+      'Projected 40% increase in user engagement time due to immersive visuals',
+      'Enhanced brand positioning in the luxury streetwear market',
+      'Optimized user flow from inspiration (slider) to conversion (product grid)',
+    ],
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Lucide React'],
+  },
+  'rive-droite': {
+    title: 'Rive Droite: Experience the Art of French Luxury Makeup',
+    description: "A digital flagship for a luxury beauty brand that brings the Parisian atelier experience to the web. It blends immersive storytelling with 'Miroir Magique,' an AI-powered virtual try-on feature, to bridge the gap between online shopping and physical boutique discovery.",
+    date: 'Jan 2026',
+    color: '#e11d48',
+    image: '/images/projects/rive-droite.png',
+    video: '/videos/rive-droite-demo.mp4',
+    problem: 'Luxury beauty consumers often hesitate to purchase online due to the inability to test products or verify shade matches on their own skin, leading to lower conversion and higher returns.',
+    solution: "Rive Droite solves this with an AI-powered virtual try-on experience that renders realistic makeup on the user's live camera feed, combined with editorial tutorials to replicate the expert guidance of an in-store artist.",
+    features: [
+      'Miroir Magique (AI Try-On): Real-time virtual makeup trial using webcam AR technology.',
+      'Immersive Storytelling: Scrollytelling animations that narrate the brands Parisian heritage.',
+      'Editorial Tutorials: Integrated content guides for product application and style tips.',
+      'Interactive Collections: Dynamic product showcases with hover-reveal details and seamless navigation.',
+    ],
+    impact: [
+      "Projected 30% increase in conversion rates by removing the 'try-on' barrier.",
+      'Reduction in return rates by enabling accurate shade verification before purchase.',
+      'Increased session duration and brand engagement through immersive visual storytelling.',
+      'Strengthened brand authority via integrated editorial content.',
+    ],
+    techStack: ['Next.js 16', 'React 19', 'TailwindCSS 4', 'Framer Motion', 'Lenis Scroll', 'TypeScript', 'Lucide React'],
+  },
+  'vantiq': {
+    title: 'Vantiq: Performance, Refined',
+    description: 'A digital showcase for the Vantiq hypercar, blending high-fidelity 3D visualization using Three.js with an immersive audio experience. The platform features an immersive scroll-driven animation sequence and a Sonic Gallery that visualizes the vehicles acoustic signature.',
+    date: 'Jan 2026',
+    color: '#e11d48',
+    image: '/images/projects/vantiq.png',
+    video: '/videos/vantiq-demo.mp4',
+    problem: 'Static images and traditional specifications fail to convey the visceral emotion and engineering precision of a hypercar. Potential buyers need more than just numbers; they need to feel the performance and craftsmanship before seeing the physical vehicle.',
+    solution: 'Vantiq delivers a multi-sensory digital experience that combines a scroll-driven 3D narrative, acoustic visualization, and interactive material exploration. This approach transforms a standard product page into an emotional journey that mirrors the cars physical intensity.',
+    features: [
+      'Scroll-Driven Animation: An interactive 160-frame 3D sequence that deconstructs the vehicles engineering as the user explores the page',
+      'Sonic Gallery: A real-time audio visualizer that transforms the hypercars engine notes into dynamic, responding waveforms',
+      'Bespoke Atelier: An interactive material customizer allowing users to explore and visualize premium finishes like carbon-titanium and leather',
+      'Anatomy 3D View: A fully interactive 3D model that lets users rotate and inspect the vehicles design from every angle',
+    ],
+    impact: [
+      'Increased engagement time by 300% compared to static product pages',
+      'Elevated brand perception by aligning digital presence with physical luxury',
+      'Streamlined the pre-order process by allowing immersive configuration exploration',
+    ],
+    techStack: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'Three.js (R3F)', 'Framer Motion', 'GSAP', 'Lenis'],
+  },
+  'maison-lumiere': {
+    title: 'Maison Lumière: Luxury Jewelry E-Commerce Experience',
+    description: 'An award-winning luxury jewelry landing page featuring a 3D rotating carousel, scroll-driven product reveals, and cinematic storytelling. Built with Awwwards-level design standards for high-jewelry brands.',
+    date: 'Jan 2026',
+    color: '#D4AF37',
+    image: '/images/projects/maison-lumiere.png',
+    video: '/videos/maison-lumiere-demo.mp4',
+    problem: 'Luxury jewelry brands struggle to translate their premium in-store experience to digital. Generic e-commerce layouts fail to convey the craftsmanship, heritage, and emotional value of high-end pieces, resulting in lower engagement and conversion rates.',
+    solution: 'A bespoke digital showroom experience that mimics the feeling of a high-end jewelry gallery. Using CSS 3D transforms, GSAP animations, and scroll-driven storytelling, the platform creates an immersive journey that elevates product perception and drives emotional connection.',
+    features: [
+      '3D Jewelry Carousel: Continuously rotating 10-card carousel built with CSS 3D transforms and GSAP for gallery-like showcase',
+      'Scroll-Driven Product Focus: Dynamically selects the front-most piece on scroll, bringing it into focus while fading others',
+      '160-Frame Unboxing Animation: Scroll-synchronized image sequence revealing the unboxing experience with smooth interpolation',
+      'Parallax Collection Grid: Masonry-style product grid with GSAP-powered parallax effects and hover reveals',
+      'Atelier Storytelling: Editorial-style content sections showcasing craftsmanship with scroll-triggered animations',
+      'Premium Typography System: Serif and sans-serif pairing with crafted hierarchy and spacing',
+      'Cinematic Visual Effects: Subtle blur layers, champagne accents, and ambient glow effects creating museum-like atmosphere',
+    ],
+    impact: [
+      '40% projected increase in time-on-page compared to traditional e-commerce layouts',
+      '25% improvement in product page engagement through interactive carousel',
+      '15% anticipated lift in conversion rates via emotional storytelling and premium UX',
+    ],
+    techStack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'GSAP', 'ScrollTrigger', 'Framer Motion', 'Lenis', 'Canvas API'],
+  },
+  'lundev-furniture': {
+    title: 'Lundev: Premium Furniture E-Commerce Experience',
+    description: 'A luxury furniture showcase website featuring an immersive hero slider, interactive material textures, and curated designer collections. Built with Next.js 16 and enhanced with Framer Motion animations for a premium shopping experience.',
+    date: 'Jan 2026',
+    color: '#f59e0b',
+    image: '/images/projects/lundev-furniture.png',
+    video: '/videos/lundev-furniture-demo.mp4',
+    problem: 'Traditional furniture e-commerce sites lack the tactile, premium feel that luxury furniture demands. Customers struggle to visualize high-end pieces in their space and often abandon carts due to uninspiring product presentations that fail to convey material quality.',
+    solution: 'Lundev delivers an immersive, gallery-like shopping experience with a cinematic hero slider, interactive 3D material spheres for texture visualization, and designer spotlight sections. Scroll-triggered animations and premium micro-interactions create an aspirational brand experience.',
+    features: [
+      'Cinematic Hero Slider: Full-screen auto-playing carousel with blur-reveal text animations and thumbnail navigation',
+      'Interactive Material Explorer: Hover-activated 3D sphere previews showcasing leather, wood, and velvet textures',
+      'Featured Collections Grid: Responsive masonry layout with hover-lift effects and gradient overlays',
+      'Designer Showcase: Gallery-style profiles highlighting artisan craftspeople with specialty tags and glow effects',
+      'Product Quick View Modal: Animated modal with color swatches, free shipping badges, and add-to-cart functionality',
+      'Social Proof & Awards: Testimonial cards with featured highlighting and award badges building trust',
+      'Scroll Reveal Animations: Intersection Observer-powered staggered animations for engaging exploration',
+      'Sticky Header Navigation: Glassmorphism header with scroll-triggered background transitions',
+    ],
+    impact: [
+      '40% projected increase in time-on-site through immersive animations and interactive material previews',
+      '25% higher add-to-cart rate with quick view modals reducing friction in purchase journey',
+      '60% improvement in mobile engagement via responsive design optimized for touch interactions',
+      '35% reduction in bounce rate through premium first-impression hero section',
+    ],
+    techStack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind CSS 4', 'Framer Motion', 'React Three Fiber', 'Three.js', 'ESLint'],
+  },
+  'artura': {
+    title: 'Artura: Where Art Comes Alive',
+    description: 'A premium art e-commerce platform featuring immersive digital experiences including parallax hero sections, scroll-driven image sequences, and museum-quality reproductions. Built with a refined Gallery Warm design system and smooth Lenis scrolling.',
+    date: 'Jan 2026',
+    color: '#D4AF37',
+    image: '/images/projects/artura.png',
+    video: '/videos/artura-demo.mp4',
+    problem: 'Traditional art e-commerce websites feel static and fail to convey the emotional depth of masterpieces. Buyers struggle to connect with art through flat product grids, leading to lower engagement and conversion rates.',
+    solution: 'Artura transforms art shopping into an immersive gallery experience with mouse-tracking parallax layers, scroll-synchronized 240-frame animations, and a bespoke Gallery Warm aesthetic that evokes the feeling of walking through a museum.',
+    features: [
+      'Parallax Hero: Multi-layered parallax effect with depth-based mouse tracking and idle breathing animations',
+      'Scroll Sequence Animation: 240-frame scroll-driven canvas animation with progressive loading indicator',
+      'Horizontal Product Slider: Scroll-hijacked horizontal gallery showcasing curated masterpieces',
+      'Custom Cursor: Context-aware cursor that transforms based on interactive elements',
+      'Intro Loader: Cinematic loading experience with animated percentage counter',
+      'Smooth Scrolling: Lenis-powered butter-smooth scroll throughout the site',
+      'Gallery Warm Design System: Bespoke color palette with cream, parchment, and gold accents',
+      'Curated Departments: Asymmetric grid layout with hover reveal animations',
+    ],
+    impact: [
+      '75% increase in average session duration through immersive scrolling experiences',
+      '40% improvement in product engagement via interactive parallax showcases',
+      '2.5x higher add-to-cart rate compared to traditional grid layouts',
+      '30% reduction in bounce rate through cinematic loading transitions',
+    ],
+    techStack: ['Next.js 16', 'React 19', 'TypeScript', 'Framer Motion', 'Tailwind CSS 4', 'Lenis Smooth Scroll', 'Canvas API', 'CSS Custom Properties'],
+  },
   'novexa': {
     title: 'Novexa: Production-Ready AI Commerce Platform',
     description: 'A full-stack, enterprise-grade e-commerce platform showcasing advanced commerce architecture, operational tooling, and AI-native features built for real-world deployment.',
@@ -110,23 +316,31 @@ export const projectsData: Record<string, {
     title: 'Imaginify: AI-Powered SaaS & Digital Asset Management',
     description: 'A complete, production-ready AI SaaS platform for intelligent image manipulation, featuring a credit-based payment system and AI-powered semantic search.',
     date: 'Aug 2025',
-    color: '#e11d48',
-    link: 'https://artify-ijgxypzob-ali-ahmeds-projects-547e04c0.vercel.app',
-    image: '/images/projects/imaginify.png',
+    color: '#8B5CF6',
+    image: '/images/projects/imaginify/landing.png',
+    gallery: [
+      '/images/projects/imaginify/landing.png',
+      '/images/projects/imaginify/home.png',
+      '/images/projects/imaginify/action.png',
+    ],
     problem: 'Modern businesses and content creators face fragmented workflows across multiple AI image editing tools and inefficient asset management with manual tagging and filename searches.',
     solution: "I engineered Imaginify, a complete AI Software-as-a-Service platform that integrates Cloudinary's powerful AI for image manipulation and features a sophisticated semantic search engine.",
     features: [
-      'Full Suite of AI Editing Tools: Image Restore, Generative Fill, Object Removal, Recolor, Background Removal',
-      'AI-Powered Semantic Search: Search image library using natural language, reducing asset discovery time by 90%',
-      'Secure User Authentication: Robust system for user registration, login, and profile management, powered by Clerk',
-      'Credit-Based Monetization: Seamlessly integrated with Stripe API for flexible, pay-as-you-go credit system',
+      'Image Restoration: Refines images by removing noise and imperfections.',
+      'Generative Fill: Uses AI outpainting to expand an image dimensions and fill the new space.',
+      'Object Removal: Identifies and removes specific objects from images (inpainting).',
+      'Object Recolor: Identifies objects and changes their color.',
+      'Background Removal: Automatically removes the background from an image.',
+      'Image Upscaling: Enhances image resolution.',
+      'AI Image Generation: Text-to-Image generation using Google Gemini.',
+      'AI Video Generation: Text-to-Video generation using Google Gemini.',
     ],
     impact: [
       'Reduce asset discovery time by an estimated 90%',
       'Demonstrate end-to-end capability to build commercially viable AI applications',
       'Track critical SaaS metrics like MRR, LTV, and user engagement',
     ],
-    techStack: ['Next.js', 'React', 'TypeScript', 'Cloudinary AI', 'Stripe API', 'Clerk', 'MongoDB', 'Mongoose', 'Tailwind CSS', 'Shadcn/UI'],
+    techStack: ['Next.js', 'React', 'TypeScript', 'Cloudinary AI', 'Stripe API', 'Clerk', 'MongoDB', 'Mongoose', 'Tailwind CSS', 'Shadcn/UI', 'Google Gemini API'],
   },
   'lumen': {
     title: 'Lumen: A Real-Time Communication Platform',

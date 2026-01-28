@@ -123,8 +123,52 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </section>
 
-        {/* Project Image */}
-        {project.image && (
+        {/* Project Gallery or Single Image */}
+        {project.gallery ? (
+          <section className="px-6 pb-16">
+            <div className="max-w-6xl mx-auto space-y-8">
+              {project.gallery.map((img, index) => (
+                <motion.div
+                  key={img}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative aspect-video rounded-2xl overflow-hidden border border-white/5"
+                >
+                  <Image
+                    src={img}
+                    alt={`${project.title} - Image ${index + 1}`}
+                    fill
+                    className="object-cover object-top"
+                    priority={index === 0}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)]/20 via-transparent to-transparent" />
+                </motion.div>
+              ))}
+            </div>
+          </section>
+        ) : project.video ? (
+          <section className="px-6 pb-16">
+            <div className="max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative aspect-video rounded-2xl overflow-hidden border border-white/5 bg-black"
+              >
+                <video
+                  src={project.video}
+                  controls
+                  poster={project.image}
+                  className="w-full h-full object-cover"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </motion.div>
+            </div>
+          </section>
+        ) : project.image ? (
           <section className="px-6 pb-16">
             <div className="max-w-6xl mx-auto">
               <motion.div
@@ -144,7 +188,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
               </motion.div>
             </div>
           </section>
-        )}
+        ) : null}
 
         {/* Problem & Solution */}
         <section className="px-6 pb-16">
