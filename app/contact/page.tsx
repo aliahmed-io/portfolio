@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import {
   BsTwitterX,
-  BsGithub,
+  BsInstagram,
   BsEnvelope,
   BsArrowUpRight
 } from 'react-icons/bs';
@@ -37,13 +37,13 @@ const contactMethods = [
     color: 'var(--three-d-color)',
   },
   {
-    id: 'github',
-    icon: BsGithub,
-    title: 'GitHub',
-    value: 'aliahmed-io',
-    href: 'https://github.com/aliahmed-io',
-    description: 'Open source & code',
-    color: 'var(--text-secondary)',
+    id: 'instagram',
+    icon: BsInstagram,
+    title: 'Instagram',
+    value: '@aly.al.shimi',
+    href: 'https://www.instagram.com/aly.al.shimi/',
+    description: 'Visual diary & updates',
+    color: '#E1306C',
   },
 ];
 

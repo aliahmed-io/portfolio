@@ -22,39 +22,56 @@ const Galaxy = dynamic(() => import('@/components/Galaxy'), {
 // Service tiers
 const serviceTiers = [
   {
-    id: 'foundational',
-    name: 'Foundational Full-Stack',
-    price: '$3,500',
-    description: 'A complete, custom e-commerce or business website with a built-in CMS, designed to convert visitors into customers.',
-    ideal: 'Businesses needing a high-quality online presence without advanced niche features.',
+    id: 'landing',
+    name: 'Cinematic Landing Page',
+    price: '$2,800',
+    description: 'An award-winning, high-conversion landing page designed to captivate your audience. Features cinematic animations and immersive storytelling.',
+    ideal: 'Product launches, Luxury brands, and Portfolios.',
     features: [
-      'Custom UI/UX design',
-      'Full-stack development (Next.js)',
-      'Integrated CMS',
-      'Core e-commerce functionality',
-      'Responsive design',
-      'SEO optimization',
+      'Awwwards-quality design',
+      'Scroll-driven animations',
+      'Interactive 3D hero section',
+      'Cinematic storytelling',
+      'Mobile-first responsive',
+      'Performance optimized',
     ],
-    color: 'var(--text-secondary)',
+    color: 'var(--design-color)',
     popular: false,
   },
   {
-    id: 'niche',
-    name: 'Niche Full-Stack',
-    subtitle: '3D or AI Integration',
-    price: '$5,000',
-    description: 'Everything in the Foundational package, plus a core integration of either an interactive 3D experience or a significant AI feature.',
-    ideal: 'Ambitious brands looking to innovate and create a distinct competitive advantage.',
+    id: 'fullstack',
+    name: 'Full-Stack Application',
+    price: '$4,500',
+    description: 'A complete, custom e-commerce or business platform with a built-in CMS, user authentication, and database integration.',
+    ideal: 'SaaS products, E-commerce stores, and complex web apps.',
     features: [
-      'All Foundational features',
-      'Choice: 3D product viewer OR',
-      'Choice: Custom AI integration',
-      'Smart search or chatbot',
-      'Premium animations',
-      'Priority support',
+      'Custom UI/UX design',
+      'Next.js 15 / React 19',
+      'CMS & Admin Dashboard',
+      'Payment Processing (Stripe)',
+      'User Authentication',
+      'Database Design',
+    ],
+    color: 'var(--text-secondary)',
+    popular: true,
+  },
+  {
+    id: 'immersive',
+    name: 'The "Award-Winning" Exp.',
+    subtitle: 'AI + 3D Integration',
+    price: '$6,500+',
+    description: 'The ultimate digital experience. Combines cinematic design with advanced AI features and complex 3D interactivity.',
+    ideal: 'Market leaders looking to dominate their industry with innovation.',
+    features: [
+      'All Landing & Full-Stack features',
+      'Advanced WebGL / Three.js',
+      'Custom AI Agent integration',
+      'Real-time audio/video',
+      'Physics-based interactions',
+      'White-glove support',
     ],
     color: 'var(--accent-primary)',
-    popular: true,
+    popular: false,
   },
 ];
 
@@ -181,8 +198,8 @@ export default function ServicesPage() {
 
                   <div
                     className={`h-full p-8 rounded-2xl border transition-all duration-300 ${tier.popular
-                        ? 'border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/5 hover:border-[var(--accent-primary)]/50'
-                        : 'border-white/5 bg-white/[0.02] hover:border-white/10'
+                      ? 'border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/5 hover:border-[var(--accent-primary)]/50'
+                      : 'border-white/5 bg-white/[0.02] hover:border-white/10'
                       }`}
                   >
                     <div className="mb-6">
@@ -221,8 +238,8 @@ export default function ServicesPage() {
                     <Link
                       href="/contact"
                       className={`w-full flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-xl transition-all duration-300 ${tier.popular
-                          ? 'bg-[var(--accent-primary)] text-white hover:bg-[var(--accent-primary)]/90'
-                          : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+                        ? 'bg-[var(--accent-primary)] text-white hover:bg-[var(--accent-primary)]/90'
+                        : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
                         }`}
                     >
                       <span>Get Started</span>

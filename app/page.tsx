@@ -384,12 +384,12 @@ export default function HomePage() {
           </div>
           <div className="flex items-center gap-6">
             <a
-              href="https://github.com/aliahmed-io"
+              href="https://www.instagram.com/aly.al.shimi/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[var(--text-muted)] hover:text-white transition-colors"
             >
-              GitHub
+              Instagram
             </a>
             <a
               href="https://x.com/ali_shimi_dev"
