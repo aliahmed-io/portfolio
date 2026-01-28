@@ -3,22 +3,95 @@
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import {
+  BsStars,
+  BsCpu,
+  BsPalette,
+  BsCode,
+  BsLightning,
+  BsGear,
+  BsArrowRight
+} from 'react-icons/bs';
+import {
+  SiNextdotjs,
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiPrisma,
+  SiPostgresql,
+  SiStripe,
+  SiOpenai
+} from 'react-icons/si';
+import { TbBrandThreejs } from 'react-icons/tb';
 
-// Dynamically import components for better performance
-const RootBackground = dynamic(() => import('@/components/shared/RootBackground'), {
+// Dynamically import background
+const Galaxy = dynamic(() => import('@/components/Galaxy'), {
   ssr: false,
-  loading: () => <div className="fixed inset-0 bg-gradient-to-b from-gray-900 to-black" />
+  loading: () => <div className="fixed inset-0 bg-[var(--bg-primary)]" />,
 });
 
-const SpotlightCard = dynamic(() => import('@/components/SpotlightCard'), {
-  ssr: false,
-  loading: () => <div className="w-full bg-white/5 border border-white/10 rounded-2xl animate-pulse" />
-});
+// Skills data
+const skillCategories = [
+  {
+    title: 'Frontend',
+    icon: BsCode,
+    skills: [
+      { name: 'Next.js', icon: SiNextdotjs },
+      { name: 'React', icon: SiReact },
+      { name: 'TypeScript', icon: SiTypescript },
+      { name: 'Tailwind CSS', icon: SiTailwindcss },
+    ],
+  },
+  {
+    title: 'Backend',
+    icon: BsGear,
+    skills: [
+      { name: 'Node.js', icon: BsLightning },
+      { name: 'Prisma', icon: SiPrisma },
+      { name: 'PostgreSQL', icon: SiPostgresql },
+      { name: 'Stripe', icon: SiStripe },
+    ],
+  },
+  {
+    title: 'Specializations',
+    icon: BsStars,
+    skills: [
+      { name: 'AI APIs', icon: SiOpenai },
+      { name: 'Three.js', icon: TbBrandThreejs },
+      { name: 'GSAP', icon: BsLightning },
+      { name: 'Motion', icon: BsPalette },
+    ],
+  },
+];
+
+// Approach cards
+const approaches = [
+  {
+    icon: BsStars,
+    title: 'AI Integration',
+    description: 'I design and connect custom AI solutions—smart search, chatbots, and automation—to real workflows and measurable KPIs.',
+    color: 'var(--ai-color)',
+    className: 'spec-ai',
+  },
+  {
+    icon: BsCpu,
+    title: '3D Experiences',
+    description: 'I build immersive, high-fidelity 3D viewers that turn static products into engaging experiences that boost conversions.',
+    color: 'var(--three-d-color)',
+    className: 'spec-3d',
+  },
+  {
+    icon: BsPalette,
+    title: 'Premium Design',
+    description: 'I craft calm, performant interfaces on top of clean, scalable architecture. Every decision is deliberate and purposeful.',
+    color: 'var(--design-color)',
+    className: 'spec-design',
+  },
+];
 
 export default function AboutPage() {
   const [mounted, setMounted] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -26,164 +99,244 @@ export default function AboutPage() {
 
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">
+        <div className="loading-spinner" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      <RootBackground />
+    <div className="min-h-screen bg-[var(--bg-primary)] relative">
+      {/* Background */}
+      <div className="fixed inset-0 z-0 opacity-50">
+        <Galaxy
+          speed={0.1}
+          rotationSpeed={0.05}
+          density={0.3}
+          glowIntensity={0.08}
+          hueShift={280}
+          saturation={0.4}
+          mouseInteraction={true}
+          transparent={true}
+        />
+      </div>
 
-      <div className="relative z-10 min-h-screen">
+      {/* Content */}
+      <div className="relative z-10">
         {/* Hero */}
-        <section className="px-6 py-20">
-          <div className="max-w-6xl mx-auto">
+        <section className="pt-32 pb-20 px-6">
+          <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.0, ease: 'easeOut' }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
             >
-              <SpotlightCard className="p-10 md:p-12 bg-white/5 border border-white/10 rounded-2xl">
-                <h1 className="text-4xl md:text-6xl font-light tracking-tight gradient-text mb-6">About</h1>
-                <p className="text-lg md:text-xl text-gray-300 max-w-3xl leading-relaxed">
-                  I build premium, high‑performance web experiences with a calm, formal aesthetic. My focus areas are
-                  interactive 3D for immersive product storytelling and custom AI integrations that deliver tangible
-                  business outcomes.
-                </p>
-              </SpotlightCard>
+              <span className="text-[var(--accent-primary)] text-sm font-medium tracking-widest uppercase mb-4 block">
+                About Me
+              </span>
+              <h1 className="text-4xl md:text-6xl font-light heading-display mb-6">
+                Building the future of
+                <br />
+                <span className="gradient-text-accent">web experiences</span>
+              </h1>
+            </motion.div>
+
+            {/* Intro Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="p-8 md:p-12 rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-sm"
+            >
+              <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed mb-6">
+                I&apos;m a fullstack developer who builds premium, high-performance web experiences
+                with a focus on <span className="text-white">AI integration</span>, <span className="text-white">interactive 3D</span>,
+                and <span className="text-white">thoughtful design</span>.
+              </p>
+              <p className="text-[var(--text-secondary)] leading-relaxed">
+                My work sits at the intersection of technology and creativity. I believe that
+                exceptional digital products should be clear, purposeful, and respectful of the
+                user&apos;s time—while still delivering that &quot;wow&quot; factor that makes them memorable.
+              </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Primary content grid */}
-        <section className="px-6 pb-20">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid gap-8 md:grid-cols-3">
-              {/* Mission & Philosophy */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-              >
-                <SpotlightCard className="p-8 h-full bg-white/5 border border-white/10 rounded-2xl">
-                  <h2 className="text-2xl font-light mb-3">Mission & Philosophy</h2>
-                  <p className="text-gray-300 leading-relaxed">
-                    Technology should be clear, purposeful, and respectful of the user’s time. I design systems that are
-                    robust, scalable, and aligned to measurable business goals.
-                  </p>
-                </SpotlightCard>
-              </motion.div>
-
-              {/* Specializations */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: 'easeOut', delay: 0.05 }}
-              >
-                <SpotlightCard className="p-8 h-full bg-white/5 border border-white/10 rounded-2xl">
-                  <h2 className="text-2xl font-light mb-3">Specializations</h2>
-                  <ul className="space-y-2 text-gray-300">
-                    <li>• Interactive 3D product experiences</li>
-                    <li>• Custom AI (search, chat, automation)</li>
-                    <li>• Calm, performant UI engineering</li>
-                    <li>• Scalable, modern full‑stack architecture</li>
-                  </ul>
-                </SpotlightCard>
-              </motion.div>
-
-              {/* Tooling */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
-              >
-                <SpotlightCard className="p-8 h-full bg-white/5 border border-white/10 rounded-2xl">
-                  <h2 className="text-2xl font-light mb-3">Tooling</h2>
-                  <div className="flex flex-wrap gap-2">
-                    {['Next.js', 'TypeScript', 'React', 'Tailwind', 'Three.js', 'GSAP', 'AI APIs'].map((t) => (
-                      <span key={t} className="px-3 py-1 bg-white/10 text-xs text-gray-300 rounded-full border border-white/10">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </SpotlightCard>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        {/* Approach cards */}
-        <section className="px-6 pb-20">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid gap-8 md:grid-cols-3">
-              {[
-                {
-                  title: '3D Experiences',
-                  body:
-                    'Turn static products into immersive, high‑fidelity viewers that increase engagement and buyer confidence.'
-                },
-                {
-                  title: 'AI Integrations',
-                  body:
-                    'Design and connect custom AI—smart search, assistants, and automation—to real workflows and KPIs.'
-                },
-                {
-                  title: 'Full‑stack Craft',
-                  body:
-                    'Calm interfaces on top of clean, scalable architecture. Every decision is deliberate and measurable.'
-                }
-              ].map((card, i) => (
-                <motion.div
-                  key={card.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, ease: 'easeOut', delay: 0.05 * i }}
-                >
-                  <SpotlightCard className="p-8 h-full bg-white/5 border border-white/10 rounded-2xl">
-                    <h3 className="text-xl font-light mb-2">{card.title}</h3>
-                    <p className="text-gray-300 leading-relaxed">{card.body}</p>
-                  </SpotlightCard>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="px-6 pb-24">
+        {/* Approach Section */}
+        <section className="py-20 px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="text-center mb-12"
             >
-              <SpotlightCard className="p-10 md:p-12 bg-white/5 border border-white/10 rounded-2xl text-center">
-                <h2 className="text-3xl md:text-4xl font-light">Let’s build something valuable</h2>
-                <p className="mt-4 text-gray-300 max-w-3xl mx-auto">
-                  Explore the projects or reach out to discuss the right approach for your product.
-                </p>
-                <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                  <button
-                    onClick={() => router.push('/projects')}
-                    className="px-8 py-4 bg-white/10 glass border border-white/15 text-white font-light rounded-xl hover:bg-white/15 transition-all duration-500 text-sm tracking-wider uppercase"
+              <h2 className="text-2xl md:text-3xl font-light heading-display">
+                My Approach
+              </h2>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {approaches.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className={`group ${item.className}`}
                   >
-                    View Projects
-                  </button>
-                  <button
-                    onClick={() => router.push('/contact')}
-                    className="px-8 py-4 border border-white/20 text-white font-light rounded-xl hover:border-white/30 hover:bg-white/5 transition-all duration-500 text-sm tracking-wider uppercase"
+                    <div className="relative h-full p-8 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500">
+                      {/* Icon */}
+                      <div
+                        className="w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+                        style={{
+                          background: `${item.color}15`,
+                          border: `1px solid ${item.color}30`,
+                        }}
+                      >
+                        <Icon className="w-6 h-6" style={{ color: item.color }} />
+                      </div>
+
+                      <h3 className="text-xl font-medium mb-3">{item.title}</h3>
+                      <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Skills Section */}
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-2xl md:text-3xl font-light heading-display">
+                Technical Stack
+              </h2>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {skillCategories.map((category, catIndex) => {
+                const CategoryIcon = category.icon;
+                return (
+                  <motion.div
+                    key={category.title}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: catIndex * 0.1 }}
+                    viewport={{ once: true }}
+                    className="p-6 rounded-2xl border border-white/5 bg-white/[0.02]"
                   >
-                    Contact
-                  </button>
-                </div>
-              </SpotlightCard>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-10 h-10 rounded-lg bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 flex items-center justify-center">
+                        <CategoryIcon className="w-5 h-5 text-[var(--accent-primary)]" />
+                      </div>
+                      <h3 className="text-lg font-medium">{category.title}</h3>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      {category.skills.map((skill) => {
+                        const SkillIcon = skill.icon;
+                        return (
+                          <div
+                            key={skill.name}
+                            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/5"
+                          >
+                            <SkillIcon className="w-4 h-4 text-[var(--text-muted)]" />
+                            <span className="text-sm text-[var(--text-secondary)]">{skill.name}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Values Section */}
+        <section className="py-20 px-6">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 md:p-12 rounded-3xl border border-white/5 bg-white/[0.02]"
+            >
+              <h2 className="text-2xl font-light mb-8 text-center">What I Value</h2>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {[
+                  {
+                    title: 'Quality Over Quantity',
+                    description: 'I take on fewer projects to ensure each one receives the attention and care it deserves.'
+                  },
+                  {
+                    title: 'Clear Communication',
+                    description: 'I believe in transparent, honest communication throughout every project phase.'
+                  },
+                  {
+                    title: 'Results-Driven',
+                    description: 'Every decision is tied to measurable outcomes and real business impact.'
+                  },
+                  {
+                    title: 'Continuous Learning',
+                    description: 'I stay current with emerging technologies to deliver cutting-edge solutions.'
+                  },
+                ].map((value, index) => (
+                  <motion.div
+                    key={value.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <h3 className="text-lg font-medium mb-2">{value.title}</h3>
+                    <p className="text-sm text-[var(--text-secondary)]">{value.description}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-24 px-6 border-t border-white/5">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-2xl md:text-4xl font-light heading-display mb-6">
+                Let&apos;s build something <span className="gradient-text-accent">valuable</span>
+              </h2>
+              <p className="text-[var(--text-secondary)] mb-8 max-w-xl mx-auto">
+                Explore my projects or reach out to discuss how I can help with your next venture.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/projects" className="btn-primary inline-flex items-center gap-2">
+                  <span>View Projects</span>
+                  <BsArrowRight className="w-4 h-4" />
+                </Link>
+                <Link href="/contact" className="btn-secondary">
+                  Get in Touch
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>

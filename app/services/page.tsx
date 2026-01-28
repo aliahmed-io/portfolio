@@ -3,22 +3,91 @@
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import {
+  BsStars,
+  BsCpu,
+  BsPalette,
+  BsCheck2,
+  BsArrowRight,
+  BsLightning
+} from 'react-icons/bs';
 
-// Dynamically import components for better performance
-const RootBackground = dynamic(() => import('@/components/shared/RootBackground'), {
+// Dynamically import background
+const Galaxy = dynamic(() => import('@/components/Galaxy'), {
   ssr: false,
-  loading: () => <div className="fixed inset-0 bg-gradient-to-b from-gray-900 to-black" />
+  loading: () => <div className="fixed inset-0 bg-[var(--bg-primary)]" />,
 });
 
-const GlareHover = dynamic(() => import('@/components/GlareHover'), {
-  ssr: false,
-  loading: () => <div className="w-full bg-white/5 border border-white/10 rounded-2xl animate-pulse" />
-});
+// Service tiers
+const serviceTiers = [
+  {
+    id: 'foundational',
+    name: 'Foundational Full-Stack',
+    price: '$3,500',
+    description: 'A complete, custom e-commerce or business website with a built-in CMS, designed to convert visitors into customers.',
+    ideal: 'Businesses needing a high-quality online presence without advanced niche features.',
+    features: [
+      'Custom UI/UX design',
+      'Full-stack development (Next.js)',
+      'Integrated CMS',
+      'Core e-commerce functionality',
+      'Responsive design',
+      'SEO optimization',
+    ],
+    color: 'var(--text-secondary)',
+    popular: false,
+  },
+  {
+    id: 'niche',
+    name: 'Niche Full-Stack',
+    subtitle: '3D or AI Integration',
+    price: '$5,000',
+    description: 'Everything in the Foundational package, plus a core integration of either an interactive 3D experience or a significant AI feature.',
+    ideal: 'Ambitious brands looking to innovate and create a distinct competitive advantage.',
+    features: [
+      'All Foundational features',
+      'Choice: 3D product viewer OR',
+      'Choice: Custom AI integration',
+      'Smart search or chatbot',
+      'Premium animations',
+      'Priority support',
+    ],
+    color: 'var(--accent-primary)',
+    popular: true,
+  },
+];
+
+// Add-on services
+const addOns = [
+  {
+    icon: BsCpu,
+    name: '3D Viewer Integration',
+    price: '$2,500',
+    description: 'Integrate a high-performance, interactive 3D product viewer into your existing e-commerce site.',
+    outcome: 'Increased user confidence and higher conversion rates.',
+    color: 'var(--three-d-color)',
+  },
+  {
+    icon: BsStars,
+    name: 'AI Chatbot Integration',
+    price: '$3,000',
+    description: 'Integrate a custom-trained AI chatbot into your website for instant customer support.',
+    outcome: 'Improved customer satisfaction and reduced operational overhead.',
+    color: 'var(--ai-color)',
+  },
+  {
+    icon: BsPalette,
+    name: 'General Feature Development',
+    price: '$1,800',
+    description: 'Build and integrate standard full-stack features like custom dashboards or booking systems.',
+    outcome: 'Enhanced functionality tailored to your specific business needs.',
+    color: 'var(--design-color)',
+  },
+];
 
 export default function ServicesPage() {
   const [mounted, setMounted] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
@@ -26,203 +95,264 @@ export default function ServicesPage() {
 
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+      <div className="min-h-screen bg-[var(--bg-primary)] flex items-center justify-center">
+        <div className="loading-spinner" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Root Background Component */}
-      <RootBackground />
+    <div className="min-h-screen bg-[var(--bg-primary)] relative">
+      {/* Background */}
+      <div className="fixed inset-0 z-0 opacity-50">
+        <Galaxy
+          speed={0.1}
+          rotationSpeed={0.05}
+          density={0.3}
+          glowIntensity={0.08}
+          hueShift={280}
+          saturation={0.4}
+          mouseInteraction={true}
+          transparent={true}
+        />
+      </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 min-h-screen">
-        {/* Header */}
-        <section className="px-6 py-20">
-          <div className="max-w-6xl mx-auto text-center">
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Hero */}
+        <section className="pt-32 pb-16 px-6">
+          <div className="max-w-5xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="space-y-8"
+              transition={{ duration: 0.8 }}
             >
-              <h1 className="text-4xl md:text-6xl font-light tracking-tight gradient-text">
+              <span className="text-[var(--accent-primary)] text-sm font-medium tracking-widest uppercase mb-4 block">
                 Services
+              </span>
+              <h1 className="text-4xl md:text-6xl font-light heading-display mb-6">
+                Premium development with
+                <br />
+                <span className="gradient-text-accent">fixed pricing</span>
               </h1>
-              <p className="text-lg text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
-                I provide specialized development services focused on delivering tangible business outcomes. My approach is built on a partnership model with value-based, fixed-price packages.
+              <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto">
+                Specialized development services focused on delivering tangible business outcomes.
+                Value-based, fixed-price packages—no hourly surprises.
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Tier 1: Full Website Development */}
-        <section className="px-6 py-16">
-          <div className="max-w-6xl mx-auto">
+        {/* Main Tiers */}
+        <section className="py-16 px-6">
+          <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
               viewport={{ once: true }}
-              className="space-y-12"
+              className="text-center mb-12"
             >
-              <div className="text-center">
-                <h2 className="text-3xl md:text-4xl font-light mb-4">Full Website Development</h2>
-                <p className="text-gray-400 font-light">For clients who need a complete, high-performance web application built on a modern, scalable foundation.</p>
-              </div>
+              <h2 className="text-2xl md:text-3xl font-light heading-display">
+                Full Website Development
+              </h2>
+              <p className="text-[var(--text-secondary)] mt-2">
+                Complete, high-performance web applications built on modern, scalable foundations.
+              </p>
+            </motion.div>
 
-              <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-6">
+              {serviceTiers.map((tier, index) => (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  key={tier.id}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className=""
-                >
-                  <GlareHover className="bg-white/10 glass border border-white/15 rounded-2xl p-8 hover:bg-white/15 hover:border-white/25 transition-all duration-500" width="100%" height="auto" borderRadius="1rem" borderColor="#2a2a2a" glareColor="#ffffff" glareOpacity={0.25} glareAngle={-35} glareSize={200}>
-                    <h3 className="text-2xl font-light mb-4">Foundational Full-Stack</h3>
-                    <p className="text-gray-300 mb-6 font-light leading-relaxed">
-                      A complete, custom e-commerce or business website with a built-in CMS, designed to convert visitors into customers.
-                    </p>
-                    <div className="text-3xl font-light mb-4">$3,500 USD</div>
-                    <p className="text-sm text-gray-400 mb-6 font-light">
-                      <strong>Ideal For:</strong> Businesses needing a high-quality online presence without advanced niche features.
-                    </p>
-                    <ul className="space-y-2 text-sm text-gray-300 font-light">
-                      <li>• Custom UI/UX design</li>
-                      <li>• Full-stack development (Next.js)</li>
-                      <li>• Integrated CMS</li>
-                      <li>• Core e-commerce functionality</li>
-                    </ul>
-                    <p className="text-sm text-gray-400 mb-6 font-light"></p>
-                  </GlareHover>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   className="relative"
                 >
-                  <GlareHover className="bg-white/10 glass border border-white/20 rounded-2xl p-8 hover:bg-white/15 hover:border-white/30 transition-all duration-500" width="100%" height="auto" borderRadius="1rem" borderColor="#3a3a3a" glareColor="#ffffff" glareOpacity={0.28} glareAngle={-35} glareSize={220}>
-                    <div className="absolute top-4 right-4 px-3 py-1 bg-white/10 text-white text-xs rounded-full border border-white/20 font-light tracking-wider uppercase">
-                      Popular
+                  {tier.popular && (
+                    <div className="absolute -top-3 left-6 z-10">
+                      <span className="px-4 py-1 text-xs font-medium bg-[var(--accent-primary)] text-white rounded-full flex items-center gap-1.5">
+                        <BsLightning className="w-3 h-3" />
+                        Most Popular
+                      </span>
                     </div>
-                    <h3 className="text-2xl font-light mb-4">Niche Full-Stack (3D or AI)</h3>
-                    <p className="text-gray-300 mb-6 font-light leading-relaxed">
-                      Everything in the Foundational package, plus a core integration of either an interactive 3D experience or a significant AI feature to create a market-leading platform.
+                  )}
+
+                  <div
+                    className={`h-full p-8 rounded-2xl border transition-all duration-300 ${tier.popular
+                        ? 'border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/5 hover:border-[var(--accent-primary)]/50'
+                        : 'border-white/5 bg-white/[0.02] hover:border-white/10'
+                      }`}
+                  >
+                    <div className="mb-6">
+                      <h3 className="text-xl font-medium mb-1">{tier.name}</h3>
+                      {tier.subtitle && (
+                        <span className="text-sm text-[var(--accent-primary)]">{tier.subtitle}</span>
+                      )}
+                    </div>
+
+                    <div className="mb-6">
+                      <span className="text-4xl font-light">{tier.price}</span>
+                      <span className="text-[var(--text-muted)] ml-2">USD</span>
+                    </div>
+
+                    <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">
+                      {tier.description}
                     </p>
-                    <div className="text-3xl font-light mb-4">$5,000 USD</div>
-                    <p className="text-sm text-gray-400 mb-6 font-light">
-                      <strong>Ideal For:</strong> Ambitious brands looking to innovate and create a distinct competitive advantage.
-                    </p>
-                    <ul className="space-y-2 text-sm text-gray-300 font-light">
-                      <li>• All Foundational features</li>
-                      <li>• Choice of 3D product viewer</li>
-                      <li>• Custom AI integration</li>
-                      <li>• Smart search or advanced chatbot</li>
+
+                    <div className="mb-6 pb-6 border-b border-white/5">
+                      <span className="text-xs text-[var(--text-muted)] uppercase tracking-wider">Ideal for</span>
+                      <p className="text-sm text-[var(--text-secondary)] mt-1">{tier.ideal}</p>
+                    </div>
+
+                    <ul className="space-y-3 mb-8">
+                      {tier.features.map((feature) => (
+                        <li key={feature} className="flex items-start gap-3 text-sm">
+                          <BsCheck2
+                            className="w-5 h-5 mt-0.5 flex-shrink-0"
+                            style={{ color: tier.popular ? 'var(--accent-primary)' : 'var(--text-muted)' }}
+                          />
+                          <span className="text-[var(--text-secondary)]">{feature}</span>
+                        </li>
+                      ))}
                     </ul>
-                  </GlareHover>
+
+                    <Link
+                      href="/contact"
+                      className={`w-full flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-xl transition-all duration-300 ${tier.popular
+                          ? 'bg-[var(--accent-primary)] text-white hover:bg-[var(--accent-primary)]/90'
+                          : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'
+                        }`}
+                    >
+                      <span>Get Started</span>
+                      <BsArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </motion.div>
-              </div>
-            </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Tier 2: Feature & Niche Integration */}
-        <section className="px-6 py-16">
-          <div className="max-w-6xl mx-auto">
+        {/* Add-on Services */}
+        <section className="py-16 px-6">
+          <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
               viewport={{ once: true }}
-              className="space-y-12"
+              className="text-center mb-12"
             >
-              <div className="text-center">
-                <h2 className="text-3xl md:text-4xl font-light mb-4">Feature & Niche Integration</h2>
-                <p className="text-gray-400 font-light">For clients who have an established website and need to integrate specialized, high-impact features.</p>
-              </div>
+              <h2 className="text-2xl md:text-3xl font-light heading-display">
+                Feature & Niche Integration
+              </h2>
+              <p className="text-[var(--text-secondary)] mt-2">
+                For clients with established websites who need specialized, high-impact features.
+              </p>
+            </motion.div>
 
-              <div className="grid md:grid-cols-3 gap-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="bg-white/10 glass border border-white/15 rounded-2xl p-6 hover:bg-white/15 hover:border-white/25 transition-all duration-500"
-                >
-                  <h3 className="text-xl font-light mb-3">3D Viewer Integration</h3>
-                  <p className="text-gray-300 mb-4 text-sm font-light leading-relaxed">
-                    Integrate a high-performance, interactive 3D product viewer into your existing e-commerce site.
-                  </p>
-                  <div className="text-2xl font-light mb-4">$2,500 USD</div>
-                  <p className="text-xs text-gray-400 font-light">
-                    <strong>Outcome:</strong> Increased user confidence and higher conversion rates.
-                  </p>
-                </motion.div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {addOns.map((addon, index) => {
+                const Icon = addon.icon;
+                return (
+                  <motion.div
+                    key={addon.name}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="group"
+                  >
+                    <div className="h-full p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-white/10 hover:bg-white/[0.04] transition-all duration-300">
+                      <div
+                        className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                        style={{
+                          background: `${addon.color}15`,
+                          border: `1px solid ${addon.color}30`,
+                        }}
+                      >
+                        <Icon className="w-6 h-6" style={{ color: addon.color }} />
+                      </div>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="bg-white/10 glass border border-white/15 rounded-2xl p-6 hover:bg-white/15 hover:border-white/25 transition-all duration-500"
-                >
-                  <h3 className="text-xl font-light mb-3">AI Chatbot Integration</h3>
-                  <p className="text-gray-300 mb-4 text-sm font-light leading-relaxed">
-                    Integrate a custom-trained AI chatbot into your website for instant customer support.
-                  </p>
-                  <div className="text-2xl font-light mb-4">$3,000 USD</div>
-                  <p className="text-xs text-gray-400 font-light">
-                    <strong>Outcome:</strong> Improved customer satisfaction and reduced operational overhead.
-                  </p>
-                </motion.div>
+                      <h3 className="text-lg font-medium mb-2">{addon.name}</h3>
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="bg-white/10 glass border border-white/15 rounded-2xl p-6 hover:bg-white/15 hover:border-white/25 transition-all duration-500"
-                >
-                  <h3 className="text-xl font-light mb-3">General Feature Development</h3>
-                  <p className="text-gray-300 mb-4 text-sm font-light leading-relaxed">
-                    Build and integrate standard full-stack features like custom dashboards or booking systems.
-                  </p>
-                  <div className="text-2xl font-light mb-4">$1,800 USD</div>
-                  <p className="text-xs text-gray-400 font-light">
-                    <strong>Outcome:</strong> Enhanced functionality tailored to your specific business needs.
-                  </p>
-                </motion.div>
+                      <div className="mb-4">
+                        <span className="text-2xl font-light">{addon.price}</span>
+                        <span className="text-[var(--text-muted)] ml-2 text-sm">USD</span>
+                      </div>
+
+                      <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">
+                        {addon.description}
+                      </p>
+
+                      <div className="pt-4 border-t border-white/5">
+                        <span className="text-xs text-[var(--text-muted)] uppercase tracking-wider">Outcome</span>
+                        <p className="text-sm text-[var(--text-secondary)] mt-1">{addon.outcome}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Process Section */}
+        <section className="py-16 px-6">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-8 md:p-12 rounded-3xl border border-white/5 bg-white/[0.02]"
+            >
+              <h2 className="text-2xl font-light mb-8 text-center">How It Works</h2>
+
+              <div className="grid md:grid-cols-4 gap-8">
+                {[
+                  { step: '01', title: 'Discovery', desc: 'We discuss your goals, requirements, and vision.' },
+                  { step: '02', title: 'Proposal', desc: 'I provide a detailed scope and fixed price.' },
+                  { step: '03', title: 'Build', desc: 'Development with regular updates and feedback.' },
+                  { step: '04', title: 'Launch', desc: 'Deployment, testing, and handover.' },
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.step}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="text-center"
+                  >
+                    <div className="text-3xl font-light text-[var(--accent-primary)] mb-3">{item.step}</div>
+                    <h3 className="text-lg font-medium mb-2">{item.title}</h3>
+                    <p className="text-sm text-[var(--text-secondary)]">{item.desc}</p>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="px-6 py-16">
+        <section className="py-24 px-6 border-t border-white/5">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="space-y-8"
             >
-              <h2 className="text-3xl md:text-4xl font-light">Ready to Get Started?</h2>
-              <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto font-light leading-relaxed">
+              <h2 className="text-2xl md:text-4xl font-light heading-display mb-6">
+                Ready to get started?
+              </h2>
+              <p className="text-[var(--text-secondary)] mb-8 max-w-xl mx-auto">
                 Let&apos;s discuss your project requirements and find the perfect solution for your business needs.
               </p>
-              <button
-                onClick={() => router.push('/contact')}
-                className="px-10 py-4 bg-white/10 glass border border-white/15 text-white font-light rounded-xl hover:bg-white/15 transition-all duration-500 transform hover:scale-[1.02] text-sm tracking-wider uppercase"
-              >
-                Start Your Project
-              </button>
+              <Link href="/contact" className="btn-primary inline-flex items-center gap-2">
+                <span>Start Your Project</span>
+                <BsArrowRight className="w-4 h-4" />
+              </Link>
             </motion.div>
           </div>
         </section>
