@@ -136,18 +136,18 @@ function FeaturedProjectPreview() {
           </h2>
         </motion.div>
 
-        {/* Featured Project Card - Novexa */}
+        {/* Featured Project Card - Aethelon */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <Link href="/projects/novexa" className="group block">
+          <Link href="/projects/aethelon" className="group block">
             <div className="relative rounded-3xl border border-white/5 bg-white/[0.02] overflow-hidden transition-all duration-500 hover:border-[var(--design-color)]/30">
               {/* Project image area */}
               <div className="relative h-[400px] bg-gradient-to-b from-[var(--design-color)]/5 to-transparent overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/images/projects/novexa.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700" />
+                <div className="absolute inset-0 bg-[url('/images/projects/aethelon.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-primary)]/50 to-transparent" />
               </div>
 
@@ -157,20 +157,20 @@ function FeaturedProjectPreview() {
                   <span className="px-3 py-1 text-xs font-medium rounded-full bg-[var(--design-color)]/10 text-[var(--design-color)] border border-[var(--design-color)]/20">
                     Featured
                   </span>
-                  <span className="text-[var(--text-muted)] text-sm">Jan 2025</span>
+                  <span className="text-[var(--text-muted)] text-sm">Mar 2026</span>
                 </div>
 
                 <h3 className="text-2xl md:text-3xl font-medium text-white mb-4 group-hover:text-[var(--design-color)] transition-colors duration-300">
-                  Novexa: AI Commerce Platform
+                  Aethelon: Premium Luxury Retail
                 </h3>
 
                 <p className="text-[var(--text-secondary)] max-w-2xl mb-6">
-                  Production-ready e-commerce with AI shopping assistant, smart search, 3D viewer integration, and complete operations dashboard.
+                  A cinematic, high-performance e-commerce platform for luxury retail featuring sub-500ms load times, integrated AR product visualizers, and a centralized AI operational CMS.
                 </p>
 
                 {/* Tech stack */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {['Next.js', 'AI Integration', 'Stripe', 'Prisma'].map((tech) => (
+                  {['Next.js 16', 'AR/3D', 'Tailwind CSS', 'Gemini AI'].map((tech) => (
                     <span key={tech} className="px-3 py-1 text-xs text-[var(--text-muted)] bg-white/5 rounded-full border border-white/5">
                       {tech}
                     </span>
@@ -218,6 +218,8 @@ export default function HomePage() {
   const { scrollY } = useScroll();
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
   const heroY = useTransform(scrollY, [0, 400], [0, 100]);
+  const glowOpacity = useTransform(scrollY, [0, 400], [0, 0.6]);
+  const glowScale = useTransform(scrollY, [0, 800], [0.8, 1.2]);
 
   useEffect(() => {
     setMounted(true);
@@ -233,30 +235,31 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative">
-      {/* 3D Background */}
-      <Suspense fallback={<div className="fixed inset-0 bg-[var(--bg-primary)]" />}>
-        <div className="fixed inset-0 z-0">
-          <Galaxy
-            speed={0.15}
-            rotationSpeed={0.08}
-            density={0.5}
-            glowIntensity={0.12}
-            hueShift={280}
-            saturation={0.6}
-            mouseInteraction={true}
-            mouseRepulsion={true}
-            repulsionStrength={1.5}
-            transparent={true}
-          />
-        </div>
-      </Suspense>
+      {/* Background - Mesh Gradient */}
+      <div className="mesh-gradient">
+        <div className="mesh-orb orb-1" />
+        <div className="mesh-orb orb-2" />
+        <div className="mesh-orb orb-3" />
+      </div>
+      
+      {/* Subtle noise texture overlay */}
+      <div className="fixed inset-0 z-0 opacity-10 noise-overlay pointer-events-none" />
+
 
       {/* Hero Section */}
       <motion.section
         style={{ opacity: heroOpacity, y: heroY }}
         className="relative z-10 min-h-screen flex items-center justify-center px-6"
       >
-        <div className="max-w-5xl mx-auto text-center pt-20">
+        {/* Scroll-triggered ambient glow */}
+        <motion.div 
+          style={{ opacity: glowOpacity, scale: glowScale }}
+          className="absolute inset-0 pointer-events-none z-0"
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,var(--accent-primary)20%,transparent_70%)] opacity-20 blur-[120px]" />
+        </motion.div>
+
+        <div className="max-w-5xl mx-auto text-center pt-20 relative z-10">
           {/* Status badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -306,21 +309,7 @@ export default function HomePage() {
             </Link>
           </motion.div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="absolute bottom-12 left-1/2 -translate-x-1/2"
-          >
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="w-6 h-10 rounded-full border border-white/20 flex items-start justify-center p-2"
-            >
-              <div className="w-1 h-2 rounded-full bg-white/40" />
-            </motion.div>
-          </motion.div>
+
         </div>
       </motion.section>
 
