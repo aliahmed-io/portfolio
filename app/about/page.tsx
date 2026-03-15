@@ -2,7 +2,6 @@
 
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import {
   BsStars,
@@ -25,11 +24,7 @@ import {
 } from 'react-icons/si';
 import { TbBrandThreejs } from 'react-icons/tb';
 
-// Dynamically import background
-const Galaxy = dynamic(() => import('@/components/Galaxy'), {
-  ssr: false,
-  loading: () => <div className="fixed inset-0 bg-[var(--bg-primary)]" />,
-});
+// Removed Galaxy background for Luxury Atelier style
 
 // Skills data
 const skillCategories = [
@@ -107,19 +102,8 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative">
-      {/* Background */}
-      <div className="fixed inset-0 z-0 opacity-50">
-        <Galaxy
-          speed={0.1}
-          rotationSpeed={0.05}
-          density={0.3}
-          glowIntensity={0.08}
-          hueShift={280}
-          saturation={0.4}
-          mouseInteraction={true}
-          transparent={true}
-        />
-      </div>
+      {/* Background - using a subtle noise and static dark bg */}
+      <div className="fixed inset-0 z-0 opacity-20 noise-overlay pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10">

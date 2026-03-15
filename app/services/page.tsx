@@ -2,7 +2,6 @@
 
 import { motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import {
   BsStars,
@@ -14,91 +13,95 @@ import {
 } from 'react-icons/bs';
 
 // Dynamically import background
-const Galaxy = dynamic(() => import('@/components/Galaxy'), {
-  ssr: false,
-  loading: () => <div className="fixed inset-0 bg-[var(--bg-primary)]" />,
-});
+// Removed Galaxy background for Luxury Atelier style
 
 // Service tiers
-const serviceTiers = [
+type ServiceTier = {
+  id: string;
+  name: string;
+  subtitle?: string;
+  price: string;
+  description: string;
+  ideal: string;
+  features: string[];
+  color: string;
+  popular: boolean;
+};
+
+const serviceTiers: ServiceTier[] = [
   {
-    id: 'landing',
-    name: 'Cinematic Landing Page',
-    price: '$2,800',
-    description: 'An award-winning, high-conversion landing page designed to captivate your audience. Features cinematic animations and immersive storytelling.',
-    ideal: 'Product launches, Luxury brands, and Portfolios.',
+    id: 'tier1',
+    name: 'Tier 1: Core Commerce',
+    price: '$4,000',
+    description: 'The foundational storefront optimized for speed and conversion. 15 Days Delivery.',
+    ideal: 'Select the core architecture and feature set that best aligns with your current operational scale and growth targets.',
     features: [
-      'Awwwards-quality design',
-      'Scroll-driven animations',
-      'Interactive 3D hero section',
-      'Cinematic storytelling',
-      'Mobile-first responsive',
-      'Performance optimized',
+      'Next.js 16, Cinematic UI, Glassmorphism, Lenis Scroll',
+      'Core Dashboard (Orders, Inventory Ledger, Product CMS)',
+      'Automated Cart Recovery Pipeline',
+      'Standard Lexical Search',
     ],
-    color: 'var(--design-color)',
+    color: 'var(--text-secondary)',
     popular: false,
   },
   {
-    id: 'fullstack',
-    name: 'Full-Stack Application',
-    price: '$4,500',
-    description: 'A complete, custom e-commerce or business platform with a built-in CMS, user authentication, and database integration.',
-    ideal: 'SaaS products, E-commerce stores, and complex web apps.',
+    id: 'tier2',
+    name: 'Tier 2: Cinematic AI',
+    price: '$5,000',
+    description: 'Advanced 3D previews and AI operations. 25 Days Delivery.',
+    ideal: 'Select the core architecture and feature set that best aligns with your current operational scale and growth targets.',
     features: [
-      'Custom UI/UX design',
-      'Next.js 15 / React 19',
-      'CMS & Admin Dashboard',
-      'Payment Processing (Stripe)',
-      'User Authentication',
-      'Database Design',
+      'Everything in Tier 1',
+      'Universal AR 2.1 (Mobile & Desktop)',
+      'WebGL 3D Previews & Generative Mesh Pipeline',
+      'Storefront AI Concierge & Admin AI COO Agent',
+      'AI Workspace Vision Analysis',
+      'Hybrid Vector Search (AI)',
     ],
-    color: 'var(--text-secondary)',
+    color: 'var(--accent-primary)',
     popular: true,
   },
   {
-    id: 'immersive',
-    name: 'The "Award-Winning" Exp.',
-    subtitle: 'AI + 3D Integration',
-    price: '$6,500+',
-    description: 'The ultimate digital experience. Combines cinematic design with advanced AI features and complex 3D interactivity.',
-    ideal: 'Market leaders looking to dominate their industry with innovation.',
+    id: 'tier3',
+    name: 'Tier 3: Global Enterprise',
+    price: '$8,500',
+    description: 'The complete architecture built for global brand authority and algorithmic optimization. 30 Days Delivery.',
+    ideal: 'Select the core architecture and feature set that best aligns with your current operational scale and growth targets.',
     features: [
-      'All Landing & Full-Stack features',
-      'Advanced WebGL / Three.js',
-      'Custom AI Agent integration',
-      'Real-time audio/video',
-      'Physics-based interactions',
-      'White-glove support',
+      'Everything in Tier 2',
+      'Global Localization (2 Additional Languages)',
+      'Algorithmic Upselling (Personalized Suggestions)',
+      'Custom Product Bundles',
     ],
-    color: 'var(--accent-primary)',
+    color: 'var(--accent-secondary)',
     popular: false,
   },
 ];
 
-// Add-on services
+// Add-on services (Managed Infrastructure)
 const addOns = [
   {
-    icon: BsCpu,
-    name: '3D Viewer Integration',
-    price: '$2,500',
-    description: 'Integrate a high-performance, interactive 3D product viewer into your existing e-commerce site.',
-    outcome: 'Increased user confidence and higher conversion rates.',
-    color: 'var(--three-d-color)',
+    icon: BsLightning,
+    name: 'Basic Managed',
+    price: '$500 / month',
+    description: 'Essential management including hosting, API usage, and baseline maintenance.',
+    outcome: 'Includes 3rd-party subscriptions (Fair-Usage limits), security, updates, backups, and 2–3 hours/month dedicated dev time.',
+    color: 'var(--text-secondary)',
   },
   {
     icon: BsStars,
-    name: 'AI Chatbot Integration',
-    price: '$3,000',
-    description: 'Integrate a custom-trained AI chatbot into your website for instant customer support.',
-    outcome: 'Improved customer satisfaction and reduced operational overhead.',
+    name: 'Pro',
+    price: '$1,000 / month',
+    description: 'Advanced management with dedicated development time and priority support.',
+    outcome: 'Includes 6–8 hours/month dedicated dev time, priority response (4 business hours), and monthly 30–60 min strategic consulting call.',
     color: 'var(--ai-color)',
   },
   {
-    icon: BsPalette,
-    name: 'General Feature Development',
-    price: '$1,800',
-    description: 'Build and integrate standard full-stack features like custom dashboards or booking systems.',
-    outcome: 'Enhanced functionality tailored to your specific business needs.',
+    icon: BsCpu,
+    name: 'Growth & Strategy',
+    price: 'Custom',
+    description: 'Tailored enterprise-level support for scaling brands.',
+    outcome: 'Comprehensive SLA, extensive dev retainers, and deep strategic alignment. Billed at separate hourly rate.',
     color: 'var(--design-color)',
   },
 ];
@@ -120,19 +123,8 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative">
-      {/* Background */}
-      <div className="fixed inset-0 z-0 opacity-50">
-        <Galaxy
-          speed={0.1}
-          rotationSpeed={0.05}
-          density={0.3}
-          glowIntensity={0.08}
-          hueShift={280}
-          saturation={0.4}
-          mouseInteraction={true}
-          transparent={true}
-        />
-      </div>
+      {/* Background  - using a subtle noise and static dark bg */}
+      <div className="fixed inset-0 z-0 opacity-20 noise-overlay pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10">
@@ -161,8 +153,8 @@ export default function ServicesPage() {
         </section>
 
         {/* Main Tiers */}
-        <section className="py-16 px-6">
-          <div className="max-w-5xl mx-auto">
+        <section className="py-16 px-8">
+          <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -177,7 +169,7 @@ export default function ServicesPage() {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-3 gap-8">
               {serviceTiers.map((tier, index) => (
                 <motion.div
                   key={tier.id}
@@ -262,10 +254,11 @@ export default function ServicesPage() {
               className="text-center mb-12"
             >
               <h2 className="text-2xl md:text-3xl font-light heading-display">
-                Feature & Niche Integration
+                Managed Infrastructure & Support
               </h2>
               <p className="text-[var(--text-secondary)] mt-2">
-                For clients with established websites who need specialized, high-impact features.
+                Enterprise platforms require robust hosting, database, and AI pipeline management.
+                Choose your preferred level of ongoing operational support.
               </p>
             </motion.div>
 

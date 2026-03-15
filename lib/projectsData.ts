@@ -10,6 +10,16 @@ export interface ProjectMetadata {
 }
 
 export const projectsMetadata: Record<string, ProjectMetadata> = {
+  'aethelon': {
+    date: 'Mar 2026',
+    tech: ['Next.js 16', 'TypeScript', 'AR/3D', 'Gemini AI'],
+    color: '#D4AF37'
+  },
+  'velorum': {
+    date: 'Jan 2026',
+    tech: ['Next.js 14', 'Prisma', 'Stripe', 'Three.js'],
+    color: '#4A90D9'
+  },
   'naturo': {
     date: 'Jan 2026',
     tech: ['Next.js', 'Three.js', 'R3F', 'Framer Motion'],
@@ -22,7 +32,7 @@ export const projectsMetadata: Record<string, ProjectMetadata> = {
   },
   'rive-droite': {
     date: 'Jan 2026',
-    tech: ['Next.js', 'TailwindCSS', 'Framer Motion', 'AI Try-On'],
+    tech: ['Next.js 16', 'TailwindCSS', 'Framer Motion', 'TypeScript'],
     color: '#e11d48'
   },
   'vantiq': {
@@ -94,6 +104,66 @@ export const projectsData: Record<string, {
   video?: string;
   gallery?: string[];
 }> = {
+  'aethelon': {
+    title: 'Aethelon: Premium Luxury Retail & Spatial Commerce',
+    description: 'A cinematic, high-performance e-commerce platform for luxury retail featuring sub-500ms load times, integrated Augmented Reality (AR) product visualizers, and a centralized AI operational CMS.',
+    date: 'Mar 2026',
+    color: '#D4AF37',
+    image: '/images/projects/aethelon.png',
+    video: '/videos/aethelon-demo.mp4',
+    problem: 'High-ticket merchants often find standard websites fail to communicate premium brand quality, resulting in buyer hesitation, high customer acquisition costs, abandoned carts, and expensive reverse-logistics for returns.',
+    solution: 'A custom Next.js 16 framework with edge database architecture that drops load times below 500ms. It integrates native AR for 1-tap previews, alongside an AI-powered semantic search and consolidated operational CMS.',
+    features: [
+      'Mobile AR & 3D Previews: 1-tap "Try in Space" natively using AR, plus desktop interactive 3D viewers.',
+      'Gated Premium Vault: A distinct storefront area physically segregating ultra-premium inventory to engineer psychological scarcity.',
+      'AI Semantic Search: Intelligent search engine utilizing vector mapping to understand descriptive intent.',
+      'Consolidated Operations CMS: Built-in Admin Dashboard for inventory tracking, order fulfillment with Shippo, automated Stripe webhooks, and markdown blogs.',
+      'AI Automation Suite: AI COO Data Agent for daily strategy briefs, background review sentiment analysis, and prompt-to-HTML campaign generation.',
+      'Cart Recovery Pipelines: Automated email drip pipelines to rescue abandoned checkouts.',
+    ],
+    impact: [
+      'Sub-500ms global load times, protecting SEO rankings and reducing bounce rates.',
+      'Up to 94% higher conversion rates for consumers interacting with AR content.',
+      'Proven to reduce physical return rates by up to 40% through precise 3D/AR visualization.',
+      'Automated pipelines recovering 10% to 15% of abandoned checkout revenue.',
+    ],
+    techStack: ['Next.js 16', 'TypeScript', 'Tailwind CSS', 'Prisma', 'Stripe', 'Shippo', 'AR', 'Gemini 3.0 Pro'],
+  },
+  'velorum': {
+    title: 'Velorum: High-Performance Luxury Watch Retail',
+    description: "A cinematic, dark-mode-first luxury e-commerce platform engineered for $50,000+ timepieces. Solves the 'Luxury Gap' where standard Shopify templates cheapen premium products with white backgrounds and generic grids. Achieves a Lighthouse score of 99/100 while delivering heavy 3D and 4K visual experiences.",
+    date: 'Jan 2026',
+    color: '#4A90D9',
+    image: '/images/projects/velorum.png',
+    video: '/videos/velorum-demo.mp4',
+    gallery: [
+      '/images/projects/velorum.png',
+      '/images/projects/velorum-campaign.png',
+      '/images/projects/velorum-shop.png',
+      '/images/projects/velorum-tryon.png',
+      '/images/projects/velorum-admin.png',
+      '/images/projects/velorum-report.png',
+    ],
+    problem: "Standard e-commerce templates (Shopify/Magento) feature white backgrounds and generic grids that cheapen high-horology products. A $50,000 timepiece deserves a digital environment that matches the gravity of the physical product, not a generic listing page.",
+    solution: 'Velorum is engineered as a High-Performance Singularity. 90% of the application runs on the Edge via Next.js 14 App Router and React Server Components. Assets are Draco-compressed GLBs, images served as AVIF/WebP via next/image, and fonts are self-hosted and subsetted. The result: a 99/100 Lighthouse performance score with zero compromise on cinematic visuals.',
+    features: [
+      'Scroll-Driven Hero: 231 individual watch rotation frames interpolated to scroll position via ScrollController.tsx for a lag-free, touch-controlled cinematic sequence.',
+      'Interactive 3D Atelier: GLB model viewer with orbit controls, damping, and custom HDR Studio Lighting — progressive loading so the CTA only appears when the asset is ready.',
+      'AI COO (The Oracle): LLM-powered admin assistant with full database context. Query revenue, inventory, and trends in plain English (e.g. "How much did we make on Fridays?").',
+      'AI Product Writer: Gemini Pro generates luxury product descriptions from a product name with one click.',
+      'Premium Vault: Token-gated, VIP-only storefront area for ultra-high-end inventory not visible to the public.',
+      'Virtual Try-On: Client-side image intake → Server Action → AI generation pipeline for composite try-on results.',
+      'Operational Dashboard: Full-featured admin with orders (Kanban), Shippo label generation, Stripe webhook processing, roles management, audit logs, and an integration health panel with live latency metrics.',
+      'Kampagnen CMS: Full CRUD for Banners, Seasonal Campaigns, Editorial Blog, and Newsletter management.',
+    ],
+    impact: [
+      'Lighthouse Performance: 99/100 | Best Practices: 100/100 | SEO: 100/100 | Accessibility: 100/100.',
+      '90% of the application runs on edge/server — zero client-side API waterfalls.',
+      'Admin AI COO reduces analytical overhead by automating daily revenue and inventory briefs.',
+      'Draco-compressed 3D + progressive loading keeps 3D experience under performance budget.',
+    ],
+    techStack: ['Next.js 14', 'React', 'TypeScript', 'Tailwind CSS', 'Prisma', 'Neon (PostgreSQL)', 'Stripe', 'Shippo', 'Kinde Auth', 'Gemini AI', 'Meshy 3D', 'Three.js (R3F)', 'Redis', 'Resend'],
+  },
   'naturo': {
     title: 'Naturo: Potency by Nature. Science by Design',
     description: 'A premium e-commerce experience for high-potency mushroom supplements. The site uses cinematic scroll-driven storytelling to educate users on the dual-extraction process, bridging the gap between ancient wisdom and modern efficacy.',
@@ -141,24 +211,23 @@ export const projectsData: Record<string, {
   },
   'rive-droite': {
     title: 'Rive Droite: Experience the Art of French Luxury Makeup',
-    description: "A digital flagship for a luxury beauty brand that brings the Parisian atelier experience to the web. It blends immersive storytelling with 'Miroir Magique,' an AI-powered virtual try-on feature, to bridge the gap between online shopping and physical boutique discovery.",
+    description: "A digital flagship for a luxury beauty brand that brings the Parisian atelier experience to the web. Blends immersive storytelling with editorial tutorials and an interactive collections showcase to bridge the gap between online shopping and physical boutique discovery.",
     date: 'Jan 2026',
     color: '#e11d48',
     image: '/images/projects/rive-droite.png',
     video: '/videos/rive-droite-demo.mp4',
-    problem: 'Luxury beauty consumers often hesitate to purchase online due to the inability to test products or verify shade matches on their own skin, leading to lower conversion and higher returns.',
-    solution: "Rive Droite solves this with an AI-powered virtual try-on experience that renders realistic makeup on the user's live camera feed, combined with editorial tutorials to replicate the expert guidance of an in-store artist.",
+    problem: 'Luxury beauty consumers hesitate to purchase online because flat product grids fail to convey the brand heritage, product textures, and expert guidance found in a high-end Parisian boutique.',
+    solution: 'Rive Droite recreates the boutique atmosphere digitally through scroll-driven storytelling, editorial tutorials, and immersive product showcases that narrate the brand\'s Parisian heritage and guide the customer from inspiration to purchase.',
     features: [
-      'Miroir Magique (AI Try-On): Real-time virtual makeup trial using webcam AR technology.',
-      'Immersive Storytelling: Scrollytelling animations that narrate the brands Parisian heritage.',
-      'Editorial Tutorials: Integrated content guides for product application and style tips.',
-      'Interactive Collections: Dynamic product showcases with hover-reveal details and seamless navigation.',
+      'Immersive Storytelling: Scrollytelling animations that narrate the brand\'s Parisian heritage with cinematic transitions.',
+      'Editorial Tutorials: Integrated content guides for product application and style tips, replicating in-store artist guidance.',
+      'Interactive Collections: Dynamic product showcases with hover-reveal details and seamless navigation flow.',
+      'Cinematic Hero Sequence: Full-screen visual experience with refined motion design establishing luxury brand authority.',
     ],
     impact: [
-      "Projected 30% increase in conversion rates by removing the 'try-on' barrier.",
-      'Reduction in return rates by enabling accurate shade verification before purchase.',
-      'Increased session duration and brand engagement through immersive visual storytelling.',
-      'Strengthened brand authority via integrated editorial content.',
+      'High session durations driven by editorial-style content and scroll storytelling.',
+      'Increased brand authority via immersive Parisian heritage narrative.',
+      'Positioned as a direct competitor to high-end beauty brand websites like Charlotte Tilbury.',
     ],
     techStack: ['Next.js 16', 'React 19', 'TailwindCSS 4', 'Framer Motion', 'Lenis Scroll', 'TypeScript', 'Lucide React'],
   },
@@ -422,6 +491,7 @@ export function getAllProjectsData() {
     date: data.date,
     tech: data.techStack, // Return full tech stack for accurate count
     image: data.image,
+    video: data.video,
     color: data.color,
   }));
 }

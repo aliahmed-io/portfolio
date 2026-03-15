@@ -1,0 +1,303 @@
+Aethelon  Deployment  &  Infrastructure  
+Proposal
+ 
+●  I.  Deployment  Tiers  
+Feature  /  Capability  
+Tier  1:  Core  Commerce  
+Tier  2:  Cinematic  AI  
+Tier  3:  Global  Enterprise  
+Investment  $4,000  $5,000  $8,500  
+Delivery  Timeline  15  Days  25  Days  30  Days  
+Storefront  Architecture  
+Next.js  16,  Cinematic  UI,  Glassmorphism,  Lenis  Scroll  
+Included  Included  
+Admin  Operations  
+Core  Dashboard  (Orders,  Inventory  Ledger,  Product  CMS)  
+Included  Included  
+Revenue  Rescue  Automated  Cart  Recovery  Pipeline  
+Included  Included  
+Search  Engine  Standard  Lexical  Search  
+Hybrid  Vector  Search  (AI)  
+Hybrid  Vector  Search  (AI)  Select  the  core  architecture  and  feature  set  that  best  aligns  with  your  current  operational  scale  
+and
+ 
+growth
+ 
+targets.
+ 
+ 
+ 
+Spatial  Commerce  (AR)  
+—  Universal  AR  2.1  (Mobile  &  Desktop)  
+Universal  AR  2.1  (Mobile  &  Desktop)  
+3D  Ecosystem  —  WebGL  3D  Previews  &  Generative  Mesh  Pipeline  
+WebGL  3D  Previews  &  Generative  Mesh  Pipeline  
+AI  Operations  —  Storefront  AI  Concierge  &  Admin  AI  COO  Agent  
+Storefront  AI  Concierge  &  Admin  AI  COO  Agent  
+AI  Environment  Analysis  
+—  AI  Workspace  Vision  Analysis  
+AI  Workspace  Vision  Analysis  
+Global  Localization  
+—  —  2  Additional  Languages  (i18n)  
+Algorithmic  Upselling  
+—  —  Personalized  Activity-Based  Suggestions  
+Advanced  Merchandising  
+—  —  Custom  Product  Bundles  ●  II.  Managed  Infrastructure  &  Support  ○  Enterprise  platforms  require  robust  hosting,  database,  and  AI  pipeline  
+management.
+ 
+Choose
+ 
+your
+ 
+preferred
+ 
+level
+ 
+of
+ 
+ongoing
+ 
+operational
+ 
+support.
+ 
+Service  Element  Free  (Self-Managed)  
+Basic  Managed  Pro  Growth  &  Strategy  
+Monthly  Retainer  $0  /  month  $500  /  month  $1,000  /  month  
+3rd-Party  Subscriptions  
+Client  manages  &  pays  directly  
+Included  (subject  to  Fair-Usage  limits)  
+Included  (subject  to  Fair-Usage  limits)  
+Maintenance  Handover  guide  provided  
+Security,  updates,  uptime  monitoring,  backups  
+Security,  updates,  uptime  monitoring,  backups  
+Dedicated  Dev  Time  
+Billed  at  separate  hourly  rate  
+2–3  hours/month  (Small  fixes,  minor  configs)  
+6–8  hours/month  (UI/UX  improvements,  features)  
+Support  SLA  Standard  availability  
+Standard  response  Priority  response  (4  business  hours)  
+Strategic  Consulting  
+—  —  Monthly  30–60  min  performance  &  analytics  call  
+   ●  III.  Operational  &  Payment  Terms  
+ ○  1.  Fair-Usage  Clause  (Hosting)  ■  For  Basic  and  Pro  hosting  tiers,  the  monthly  retainer  covers  all  baseline  
+3rd-party
+ 
+infrastructure
+ 
+costs
+ 
+(Vercel,
+ 
+Neon
+ 
+Database,
+ 
+AI
+ 
+API
+ 
+usage,
+ 
+Stripe
+ 
+fees,
+ 
+Email
+ 
+routing).
+ 
+Extraordinary
+ 
+traffic
+ 
+spikes
+ 
+or
+ 
+excessive
+ 
+AI/3D
+ 
+asset
+ 
+generation
+ 
+that
+ 
+exceed
+ 
+the
+ 
+defined
+ 
+standard
+ 
+usage
+ 
+threshold
+ 
+will
+ 
+be
+ 
+billed
+ 
+at
+ 
+actual
+ 
+cost
+ 
+plus
+ 
+a
+ 
+10%
+ 
+processing
+ 
+fee,
+ 
+or
+ 
+require
+ 
+an
+ 
+upgrade
+ 
+to
+ 
+a
+ 
+custom
+ 
+enterprise
+ 
+tier.
+ 
+ 
+○  2.  Delivery  &  Commencement  ■  Delivery  timelines  (10,  15,  or  25  days)  commence  immediately  upon  
+contract
+ 
+signature
+ 
+and
+ 
+receipt
+ 
+of
+ 
+the
+ 
+initial
+ 
+deposit.
+ 
+ 
+○  3.  Infrastructure  Suspension  Policy  ■  Invoices  for  managed  infrastructure  and  support  tiers  are  due  on  the  1st  
+of
+ 
+every
+ 
+month.
+ 
+If
+ 
+payment
+ 
+is
+ 
+not
+ 
+received
+ 
+within
+ 
+7
+ 
+days,
+ 
+a
+ 
+formal
+ 
+14-day
+ 
+notice
+ 
+of
+ 
+suspension
+ 
+is
+ 
+issued.
+ 
+If
+ 
+the
+ 
+invoice
+ 
+remains
+ 
+unpaid
+ 
+at
+ 
+the
+ 
+conclusion
+ 
+of
+ 
+this
+ 
+14-day
+ 
+notice
+ 
+period,
+ 
+all
+ 
+storefront
+ 
+routing,
+ 
+database
+ 
+access,
+ 
+and
+ 
+3rd-party
+ 
+integrations
+ 
+will
+ 
+be
+ 
+immediately
+ 
+suspended
+ 
+until
+ 
+the
+ 
+outstanding
+ 
+account
+ 
+balance
+ 
+is
+ 
+cleared.
+ 
+ 
+ 

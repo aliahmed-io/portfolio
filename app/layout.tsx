@@ -1,8 +1,9 @@
 import "./globals.css";
-import { Outfit } from "next/font/google";
+import { Outfit, Cormorant_Garamond } from "next/font/google";
 import { Metadata } from "next";
 import { Analytics } from "../components/shared/Analytics";
 import NavBar from "../components/shared/NavBar";
+import AvailabilityTicker from "../components/AvailabilityTicker";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -11,6 +12,15 @@ const outfit = Outfit({
   preload: true,
   weight: ['300', '400', '500', '600', '700'],
   fallback: ['system-ui', 'arial'],
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  display: 'swap',
+  preload: true,
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
 });
 
 export const metadata: Metadata = {
@@ -66,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={outfit.variable}>
+    <html lang="en" className={`${outfit.variable} ${cormorant.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -82,6 +92,9 @@ export default function RootLayout({
       >
         {/* Subtle noise texture overlay */}
         <div className="noise-overlay" aria-hidden="true" />
+
+        {/* Availability Ticker */}
+        <AvailabilityTicker />
 
         {/* Navigation */}
         <NavBar />
