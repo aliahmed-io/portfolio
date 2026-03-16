@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { BsLinkedin, BsTwitterX, BsInstagram } from "react-icons/bs";
 
 const links = [
   { href: "/", label: "Home" },
@@ -115,6 +116,28 @@ export default function NavBar() {
               </svg>
             </Link>
 
+            {/* Social Links - Desktop */}
+            <div className="hidden md:flex items-center gap-4 ml-4 pr-4 border-r border-white/10">
+              <a
+                href="https://www.linkedin.com/in/ali-ahmed-703080380/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors duration-300"
+                title="LinkedIn"
+              >
+                <BsLinkedin className="w-4 h-4" />
+              </a>
+              <a
+                href="https://x.com/ali_shimi_dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--text-secondary)] hover:text-white transition-colors duration-300"
+                title="Twitter"
+              >
+                <BsTwitterX className="w-4 h-4" />
+              </a>
+            </div>
+
             {/* Mobile Menu Button */}
             <motion.button
               whileTap={{ scale: 0.95 }}
@@ -217,6 +240,34 @@ export default function NavBar() {
                       />
                     </svg>
                   </Link>
+                </div>
+
+                {/* Social Links - Mobile */}
+                <div className="mt-4 flex justify-center gap-6">
+                  <a
+                    href="https://www.linkedin.com/in/ali-ahmed-703080380/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[var(--accent-primary)]"
+                  >
+                    <BsLinkedin className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://x.com/ali_shimi_dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-white"
+                  >
+                    <BsTwitterX className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/aly.al.shimi/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#E1306C]"
+                  >
+                    <BsInstagram className="w-5 h-5" />
+                  </a>
                 </div>
               </div>
             </motion.div>

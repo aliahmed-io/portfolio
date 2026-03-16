@@ -10,7 +10,8 @@ import {
   BsCode,
   BsLightning,
   BsGear,
-  BsArrowRight
+  BsArrowRight,
+  BsBox
 } from 'react-icons/bs';
 import {
   SiNextdotjs,
@@ -77,6 +78,13 @@ const approaches = [
     className: 'spec-3d',
   },
   {
+    icon: BsBox,
+    title: 'AR Experiences',
+    description: 'I create augmented reality solutions that bridge the gap between digital and physical, from product try-ons to spatial interfaces.',
+    color: 'var(--ar-color)',
+    className: 'spec-ar',
+  },
+  {
     icon: BsPalette,
     title: 'Premium Design',
     description: 'I craft calm, performant interfaces on top of clean, scalable architecture. Every decision is deliberate and purposeful.',
@@ -135,7 +143,7 @@ export default function AboutPage() {
             >
               <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed mb-6">
                 I&apos;m a fullstack developer who builds premium, high-performance web experiences
-                with a focus on <span className="text-white">AI integration</span>, <span className="text-white">interactive 3D</span>,
+                with a focus on <span className="text-white">AI integration</span>, <span className="text-white">AR/3D interactions</span>,
                 and <span className="text-white">thoughtful design</span>.
               </p>
               <p className="text-[var(--text-secondary)] leading-relaxed">
@@ -161,7 +169,7 @@ export default function AboutPage() {
               </h2>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {approaches.map((item, index) => {
                 const Icon = item.icon;
                 return (
@@ -211,7 +219,7 @@ export default function AboutPage() {
               </h2>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {skillCategories.map((category, catIndex) => {
                 const CategoryIcon = category.icon;
                 return (

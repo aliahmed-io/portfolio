@@ -7,6 +7,7 @@ import {
   BsTwitterX,
   BsInstagram,
   BsEnvelope,
+  BsLinkedin,
   BsArrowUpRight
 } from 'react-icons/bs';
 
@@ -26,6 +27,15 @@ const contactMethods = [
     href: 'mailto:aly.al.shimi@gmail.com',
     description: 'Best for detailed project inquiries',
     color: 'var(--accent-primary)',
+  },
+  {
+    id: 'linkedin',
+    icon: BsLinkedin,
+    title: 'LinkedIn',
+    value: 'Ali Ahmed',
+    href: 'https://www.linkedin.com/in/ali-ahmed-703080380/',
+    description: 'Professional networking & updates',
+    color: '#0077B5',
   },
   {
     id: 'twitter',

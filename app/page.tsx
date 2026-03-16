@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { BsStars, BsCpu, BsPalette } from 'react-icons/bs';
+import { BsStars, BsCpu, BsPalette, BsBox } from 'react-icons/bs';
 import TextReveal from '@/components/TextReveal';
 
 // Specialization data
@@ -25,6 +25,15 @@ const specializations = [
     color: 'var(--three-d-color)',
     glow: 'var(--three-d-glow)',
     className: 'spec-3d',
+  },
+  {
+    id: 'ar',
+    icon: BsBox,
+    title: 'AR Experiences',
+    description: 'Augmented reality try-on and product visualization that bridge the gap between digital and physical retail.',
+    color: 'var(--ar-color)',
+    glow: 'var(--ar-glow)',
+    className: 'spec-ar',
   },
   {
     id: 'design',
@@ -111,7 +120,7 @@ function HorizontalShowcase() {
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-66.66%']);
+  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-75%']);
 
   return (
     <section ref={sectionRef} className="relative z-10 h-[200vh]">
@@ -128,7 +137,7 @@ function HorizontalShowcase() {
               What I Do
             </span>
             <h2 className="text-3xl md:text-4xl font-light heading-display">
-              Specialized in three key areas
+              Specialized in four key areas
             </h2>
           </motion.div>
         </div>
@@ -196,6 +205,95 @@ function HorizontalShowcase() {
               );
             })}
           </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Impact Stats Section
+function ImpactStats() {
+  const stats = [
+    {
+      label: 'AI Advanced Search',
+      value: '5x',
+      desc: 'Higher conversion rate for users engaging with AI search traffic.',
+      source: 'SuperPrompt'
+    },
+    {
+      label: 'AI Sales Chatbots',
+      value: '67%',
+      desc: 'Average increase in revenue using AI-driven sales agents.',
+      source: 'Salesforce'
+    },
+    {
+      label: 'AI Cart Recovery',
+      value: '35%',
+      desc: 'Abandoned carts successfully recovered via AI automation.',
+      source: 'Envive.ai'
+    },
+    {
+      label: 'AR Conversion Lift',
+      value: '94%',
+      desc: 'Higher purchase intent for AR-engaged shoppers.',
+      source: 'Shopify'
+    },
+    {
+      label: '3D User Engagement',
+      value: '82%',
+      desc: 'Shoppers who interact with 3D assets when available.',
+      source: 'Gartner'
+    },
+    {
+      label: 'UX Design ROI',
+      value: '$100',
+      desc: 'Return for every $1 invested in premium UX design.',
+      source: 'Forrester'
+    }
+  ];
+
+  return (
+    <section className="relative z-10 py-32 px-6 bg-white/[0.01] border-y border-white/5">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <span className="text-[var(--accent-primary)] text-sm font-medium tracking-widest uppercase mb-4 block">
+            The Data
+          </span>
+          <h2 className="text-3xl md:text-5xl font-light heading-display">
+            Why precision technology matters
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 md:gap-x-12 max-w-6xl mx-auto">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="text-4xl md:text-5xl xl:text-6xl font-light mb-4 gradient-text-accent">
+                {stat.value}
+              </div>
+              <h3 className="text-[11px] md:text-xs font-medium text-white mb-2 uppercase tracking-wider">
+                {stat.label}
+              </h3>
+              <p className="text-[11px] md:text-xs text-[var(--text-secondary)] leading-relaxed mb-4 max-w-[200px] mx-auto min-h-[2rem]">
+                {stat.desc}
+              </p>
+              <span className="text-[9px] text-[var(--text-muted)] uppercase tracking-widest block opacity-60">
+                Source: {stat.source}
+              </span>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -390,7 +488,7 @@ export default function HomePage() {
             className="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed mb-12"
           >
             I build premium web experiences that combine cutting-edge AI,
-            immersive 3D interactions, and thoughtful design to create real business value.
+            immersive AR/3D interactions, and thoughtful design to create real business value.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -414,6 +512,9 @@ export default function HomePage() {
 
       {/* Specializations — Horizontal Scroll Showcase */}
       <HorizontalShowcase />
+
+      {/* Impact Stats Section */}
+      <ImpactStats />
 
       {/* Featured Project */}
       <FeaturedProjectPreview />
