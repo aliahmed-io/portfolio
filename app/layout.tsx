@@ -4,6 +4,8 @@ import { Metadata } from "next";
 import { Analytics } from "../components/shared/Analytics";
 import NavBar from "../components/shared/NavBar";
 import AvailabilityTicker from "../components/AvailabilityTicker";
+import PageTransition from "../components/PageTransition";
+import CustomCursor from "../components/CustomCursor";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -93,6 +95,9 @@ export default function RootLayout({
         {/* Subtle noise texture overlay */}
         <div className="noise-overlay" aria-hidden="true" />
 
+        {/* Custom cursor for desktop */}
+        <CustomCursor />
+
         {/* Availability Ticker */}
         <AvailabilityTicker />
 
@@ -101,7 +106,9 @@ export default function RootLayout({
 
         {/* Main content */}
         <main className="relative">
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
       </body>
     </html>

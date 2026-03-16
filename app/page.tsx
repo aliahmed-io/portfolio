@@ -1,16 +1,10 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useEffect, useState, Suspense } from 'react';
-import dynamic from 'next/dynamic';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { BsStars, BsCpu, BsPalette } from 'react-icons/bs';
-
-// Dynamically import 3D background
-const Galaxy = dynamic(() => import('@/components/Galaxy'), {
-  ssr: false,
-  loading: () => <div className="fixed inset-0 bg-[var(--bg-primary)]" />,
-});
+import TextReveal from '@/components/TextReveal';
 
 // Specialization data
 const specializations = [
@@ -107,6 +101,104 @@ function SpecializationCard({
         </div>
       </div>
     </motion.div>
+  );
+}
+
+// Horizontal Scroll Showcase
+function HorizontalShowcase() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  });
+  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-66.66%']);
+
+  return (
+    <section ref={sectionRef} className="relative z-10 h-[200vh]">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+        {/* Section header */}
+        <div className="px-6 mb-8 max-w-6xl mx-auto w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-[var(--accent-primary)] text-sm font-medium tracking-widest uppercase mb-4 block">
+              What I Do
+            </span>
+            <h2 className="text-3xl md:text-4xl font-light heading-display">
+              Specialized in three key areas
+            </h2>
+          </motion.div>
+        </div>
+
+        {/* Horizontal cards */}
+        <div className="px-6 overflow-visible">
+          <motion.div
+            style={{ x }}
+            className="flex gap-8"
+          >
+            {specializations.map((spec) => {
+              const Icon = spec.icon;
+              return (
+                <div
+                  key={spec.id}
+                  className={`group relative flex-shrink-0 w-[80vw] md:w-[40vw] ${spec.className}`}
+                >
+                  <div
+                    className="relative h-full p-10 md:p-12 rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-sm transition-all duration-500 hover:border-[var(--spec-color)]/30 hover:bg-white/[0.04] overflow-hidden"
+                  >
+                    {/* Glow effect on hover */}
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                      style={{
+                        background: `radial-gradient(600px circle at 50% 0%, ${spec.glow}, transparent 40%)`,
+                      }}
+                    />
+
+                    {/* Large faded number */}
+                    <span className="absolute top-6 right-8 text-[120px] font-light leading-none text-white/[0.03] pointer-events-none select-none">
+                      {String(specializations.indexOf(spec) + 1).padStart(2, '0')}
+                    </span>
+
+                    {/* Icon */}
+                    <div
+                      className="relative w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-300 group-hover:scale-110"
+                      style={{
+                        background: `linear-gradient(135deg, ${spec.color}20, transparent)`,
+                        border: `1px solid ${spec.color}30`,
+                      }}
+                    >
+                      <Icon
+                        className="w-8 h-8 transition-colors duration-300"
+                        style={{ color: spec.color }}
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <h3 className="relative text-2xl md:text-3xl font-medium text-white mb-4 tracking-tight">
+                      {spec.title}
+                    </h3>
+                    <p className="relative text-[var(--text-secondary)] text-base leading-relaxed max-w-md">
+                      {spec.description}
+                    </p>
+
+                    {/* Arrow indicator */}
+                    <div className="relative mt-8 flex items-center gap-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: spec.color }}>
+                      <span>Explore</span>
+                      <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -259,7 +351,7 @@ export default function HomePage() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,var(--accent-primary)20%,transparent_70%)] opacity-20 blur-[120px]" />
         </motion.div>
 
-        <div className="max-w-5xl mx-auto text-center pt-20 relative z-10">
+        <div className="max-w-5xl mx-auto text-center pt-32 relative z-10">
           {/* Status badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -272,16 +364,23 @@ export default function HomePage() {
             </span>
           </motion.div>
 
-          {/* Main headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light heading-display mb-8"
-          >
-            <span className="block text-white">Fullstack Developer</span>
-            <span className="block mt-2 gradient-text-accent">AI • 3D • Design</span>
-          </motion.h1>
+          {/* Main headline — split-word reveal */}
+          <div className="mb-8">
+            <TextReveal
+              text="Fullstack Developer"
+              as="h1"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light heading-display text-white"
+              delay={0.4}
+              staggerDelay={0.08}
+            />
+            <TextReveal
+              text="AI • 3D • Design"
+              as="h1"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light heading-display gradient-text-accent mt-2"
+              delay={0.8}
+              staggerDelay={0.1}
+            />
+          </div>
 
           {/* Subheadline */}
           <motion.p
@@ -313,31 +412,8 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Specializations Section */}
-      <section className="relative z-10 py-32 px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-[var(--accent-primary)] text-sm font-medium tracking-widest uppercase mb-4 block">
-              What I Do
-            </span>
-            <h2 className="text-3xl md:text-4xl font-light heading-display">
-              Specialized in three key areas
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {specializations.map((spec, index) => (
-              <SpecializationCard key={spec.id} spec={spec} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Specializations — Horizontal Scroll Showcase */}
+      <HorizontalShowcase />
 
       {/* Featured Project */}
       <FeaturedProjectPreview />
