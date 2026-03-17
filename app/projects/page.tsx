@@ -1,11 +1,23 @@
 'use client';
 
 import { motion, AnimatePresence } from 'motion/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllProjectsData } from '@/lib/projectsData';
 import { BsStars, BsCpu, BsPalette, BsArrowRight, BsCodeSlash, BsBox } from 'react-icons/bs';
+
+// Mobile detection hook
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+  return isMobile;
+}
 
 // Removed Galaxy background for Luxury Atelier style
 
@@ -58,57 +70,52 @@ interface Project {
   color: string;
 }
 
-// Project Card Component
-// Project Card Component
-function ProjectCard({
-  project,
-  index,
-  isFeatured = false
-}: {
+// Project Card Component - Memoized for performance
+interface ProjectCardProps {
   project: Project;
   index: number;
-  isFeatured?: boolean;
-}) {
+  isMobile: boolean;
+}
+
+function ProjectCardInner({ project, index, isMobile }: ProjectCardProps) {
   const cats = projectCategories[project.id] || [];
   const primaryCat = cats[0] || 'fullstack';
   const catColor = categoryColors[primaryCat];
   const [isHovered, setIsHovered] = useState(false);
 
+  // Skip heavy animations on mobile
+  const animationProps = isMobile ? {} : {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, scale: 0.95 },
+    transition: {
+      duration: 0.5,
+      delay: index * 0.08,
+      ease: [0.16, 1, 0.3, 1] as const
+    }
+  };
+
   return (
     <motion.div
-      layout
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.08,
-        ease: [0.16, 1, 0.3, 1]
-      }}
-      className={isHovered && project.video ? 'z-20' : 'z-0'}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      layout={!isMobile}
+      {...animationProps}
+      className={isHovered && project.video && !isMobile ? 'z-20' : 'z-0'}
+      onHoverStart={() => !isMobile && setIsHovered(true)}
+      onHoverEnd={() => !isMobile && setIsHovered(false)}
     >
       <Link href={`/projects/${project.id}`} className="group block h-full">
         <div className="relative h-full rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden transition-all duration-500 hover:border-white/10 hover:bg-white/[0.04]">
           {/* Image / Video Container */}
           <div className="relative aspect-video overflow-hidden">
-            {project.video && isHovered ? (
-              <video
-                src={project.video}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-              />
-            ) : project.image ? (
+            {project.image ? (
               <Image
                 src={project.image}
                 alt={project.title}
                 fill
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                loading={index < 4 ? "eager" : "lazy"}
+                quality={isMobile ? 70 : 85}
               />
             ) : (
               <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-primary)]" />
@@ -177,11 +184,12 @@ function ProjectCard({
   );
 }
 
+const ProjectCard = memo(ProjectCardInner);
 
 export default function ProjectsPage() {
   const [mounted, setMounted] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
-
+  const isMobile = useIsMobile();
   const projects = getAllProjectsData();
 
   // Filter projects
@@ -204,7 +212,7 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative">
       {/* Background - using a subtle noise and static dark bg */}
-      <div className="fixed inset-0 z-0 opacity-20 noise-overlay pointer-events-none" />
+      <div className="fixed inset-0 z-0 opacity-10 noise-overlay pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10">
@@ -212,9 +220,9 @@ export default function ProjectsPage() {
         <section className="pt-32 pb-16 px-6">
           <div className="max-w-6xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: isMobile ? 0 : 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="text-center mb-16"
             >
               <span className="text-[var(--accent-primary)] text-sm font-medium tracking-widest uppercase mb-4 block">
@@ -231,9 +239,9 @@ export default function ProjectsPage() {
 
             {/* Filter Tabs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: isMobile ? 0 : 0.8, delay: isMobile ? 0 : 0.2 }}
               className="flex flex-wrap justify-center gap-2 mb-12"
             >
               {categories.map((cat) => {
@@ -262,7 +270,7 @@ export default function ProjectsPage() {
         <section className="px-6 pb-24">
           <div className="max-w-6xl mx-auto">
             <motion.div
-              layout
+              layout={!isMobile}
               className="grid md:grid-cols-2 gap-6"
             >
               <AnimatePresence mode="popLayout">
@@ -271,6 +279,7 @@ export default function ProjectsPage() {
                     key={project.id}
                     project={project}
                     index={index}
+                    isMobile={isMobile}
                   />
                 ))}
               </AnimatePresence>
@@ -293,9 +302,9 @@ export default function ProjectsPage() {
         <section className="py-24 px-6 border-t border-white/5">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: isMobile ? 0 : 0.8 }}
               viewport={{ once: true }}
             >
               <h2 className="text-2xl md:text-4xl font-light heading-display mb-6">
