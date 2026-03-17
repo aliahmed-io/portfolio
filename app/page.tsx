@@ -1,10 +1,11 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { BsStars, BsCpu, BsPalette, BsBox } from 'react-icons/bs';
 import TextReveal from '@/components/TextReveal';
+import { useReducedMotion, useIsMobile, useDevicePerformance } from '@/util/hooks';
 
 // Specialization data
 const specializations = [
@@ -113,15 +114,144 @@ function SpecializationCard({
   );
 }
 
-// Horizontal Scroll Showcase
+// Horizontal Scroll Showcase - Mobile optimized
 function HorizontalShowcase() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = useReducedMotion();
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-75%']);
 
+  // Use spring for smoother animation on desktop
+  const rawX = useTransform(scrollYProgress, [0, 1], ['0%', '-75%']);
+  const x = useSpring(rawX, {
+    stiffness: prefersReducedMotion ? 100 : 50,
+    damping: prefersReducedMotion ? 20 : 30,
+    mass: 1,
+  });
+
+  // Mobile touch handlers for swipe
+  const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    setStartX(clientX);
+    setScrollLeft(containerRef.current?.scrollLeft || 0);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const walk = (startX - clientX) * 1.5;
+    containerRef.current.scrollLeft = scrollLeft + walk;
+  };
+
+  const handleTouchEnd = () => {
+    // Touch end - no action needed
+  };
+
+  // Mobile: horizontal scroll container
+  if (isMobile) {
+    return (
+      <section ref={sectionRef} className="relative z-10 py-20 md:py-32">
+        <div className="px-6 mb-8 max-w-6xl mx-auto w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-[var(--accent-primary)] text-sm font-medium tracking-widest uppercase mb-4 block">
+              What I Do
+            </span>
+            <h2 className="text-2xl md:text-3xl font-light heading-display">
+              Specialized in four key areas
+            </h2>
+          </motion.div>
+        </div>
+
+        {/* Mobile: Horizontal scroll container with touch */}
+        <div
+          ref={containerRef}
+          className="overflow-x-auto scrollbar-hide px-6 pb-4"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          onMouseDown={handleTouchStart}
+          onMouseMove={handleTouchMove}
+          onMouseUp={handleTouchEnd}
+          onMouseLeave={handleTouchEnd}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="flex gap-4 w-max">
+            {specializations.map((spec) => {
+              const Icon = spec.icon;
+              return (
+                <motion.div
+                  key={spec.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className={`group relative flex-shrink-0 w-[85vw] max-w-[320px] ${spec.className}`}
+                >
+                  <div className="relative h-full p-6 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm overflow-hidden">
+                    {/* Glow effect on hover */}
+                    <div
+                      className="absolute inset-0 opacity-0 group-active:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{
+                        background: `radial-gradient(400px circle at 50% 0%, ${spec.glow}, transparent 40%)`,
+                      }}
+                    />
+
+                    {/* Large faded number */}
+                    <span className="absolute top-4 right-4 text-[80px] font-light leading-none text-white/[0.03] pointer-events-none select-none">
+                      {String(specializations.indexOf(spec) + 1).padStart(2, '0')}
+                    </span>
+
+                    {/* Icon */}
+                    <div
+                      className="relative w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                      style={{
+                        background: `linear-gradient(135deg, ${spec.color}20, transparent)`,
+                        border: `1px solid ${spec.color}30`,
+                      }}
+                    >
+                      <Icon className="w-6 h-6" style={{ color: spec.color }} />
+                    </div>
+
+                    {/* Content */}
+                    <h3 className="relative text-xl font-medium text-white mb-2 tracking-tight">
+                      {spec.title}
+                    </h3>
+                    <p className="relative text-[var(--text-secondary)] text-sm leading-relaxed">
+                      {spec.description}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="flex justify-center gap-1.5 mt-4 md:hidden">
+          {specializations.map((_, i) => (
+            <div
+              key={i}
+              className="w-1.5 h-1.5 rounded-full bg-white/20"
+            />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  // Desktop: Scroll-driven horizontal animation
   return (
     <section ref={sectionRef} className="relative z-10 h-[200vh]">
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
@@ -142,11 +272,11 @@ function HorizontalShowcase() {
           </motion.div>
         </div>
 
-        {/* Horizontal cards */}
+        {/* Horizontal cards - use translateX for GPU acceleration */}
         <div className="px-6 overflow-visible">
           <motion.div
-            style={{ x }}
-            className="flex gap-8"
+            style={{ translateX: x }}
+            className="flex gap-8 will-change-transform"
           >
             {specializations.map((spec) => {
               const Icon = spec.icon;
@@ -403,6 +533,8 @@ function FeaturedProjectPreview() {
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false);
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = useReducedMotion();
 
   // Simple scroll-based parallax without target ref (avoids hydration issues)
   const { scrollY } = useScroll();
@@ -423,31 +555,43 @@ export default function HomePage() {
     );
   }
 
+  // Disable complex animations on mobile or reduced motion
+  const heroStyle = (prefersReducedMotion || isMobile) 
+    ? {} 
+    : { opacity: heroOpacity, y: heroY };
+  
+  const glowStyle = (prefersReducedMotion || isMobile) 
+    ? {} 
+    : { opacity: glowOpacity, scale: glowScale };
+
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] relative">
-      {/* Background - Mesh Gradient */}
-      <div className="mesh-gradient">
-        <div className="mesh-orb orb-1" />
-        <div className="mesh-orb orb-2" />
-        <div className="mesh-orb orb-3" />
-      </div>
+      {/* Background - Mesh Gradient - disabled on mobile for performance */}
+      {!isMobile && (
+        <div className="mesh-gradient">
+          <div className="mesh-orb orb-1" />
+          <div className="mesh-orb orb-2" />
+          <div className="mesh-orb orb-3" />
+        </div>
+      )}
       
-      {/* Subtle noise texture overlay */}
-      <div className="fixed inset-0 z-0 opacity-10 noise-overlay pointer-events-none" />
-
+      {/* Subtle noise texture overlay - reduced on mobile */}
+      <div className={`fixed inset-0 z-0 pointer-events-none ${isMobile ? 'opacity-5' : 'opacity-10'} noise-overlay`} />
 
       {/* Hero Section */}
       <motion.section
-        style={{ opacity: heroOpacity, y: heroY }}
+        style={heroStyle}
         className="relative z-10 min-h-screen flex items-center justify-center px-6"
       >
-        {/* Scroll-triggered ambient glow */}
-        <motion.div 
-          style={{ opacity: glowOpacity, scale: glowScale }}
-          className="absolute inset-0 pointer-events-none z-0"
-        >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,var(--accent-primary)20%,transparent_70%)] opacity-20 blur-[120px]" />
-        </motion.div>
+        {/* Scroll-triggered ambient glow - disabled on mobile */}
+        {!isMobile && (
+          <motion.div 
+            style={glowStyle}
+            className="absolute inset-0 pointer-events-none z-0"
+          >
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,var(--accent-primary)20%,transparent_70%)] opacity-20 blur-[120px]" />
+          </motion.div>
+        )}
 
         <div className="max-w-5xl mx-auto text-center pt-32 relative z-10">
           {/* Status badge */}

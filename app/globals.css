@@ -156,6 +156,16 @@
    CUSTOM SCROLLBAR
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -721,4 +731,4 @@
   transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
-
+

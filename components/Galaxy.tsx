@@ -1,6 +1,12 @@
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 import { useEffect, useRef, memo } from 'react';
 
+// Detect mobile/low-power devices
+const isMobileDevice = () => {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
+};
+
 const vertexShader = `
 attribute vec2 uv;
 attribute vec2 position;
@@ -214,10 +220,20 @@ const Galaxy = memo(function Galaxy({
   const smoothMouseActive = useRef(0.0);
   const isVisible = useRef(true);
   const rafId = useRef<number | null>(null);
+  const isMobile = useRef(false);
 
   useEffect(() => {
     if (!ctnDom.current) return;
     const ctn = ctnDom.current;
+    
+    // Check if mobile on mount
+    isMobile.current = isMobileDevice();
+    
+    // Mobile optimizations
+    const mobileDensity = isMobile.current ? density * 0.5 : density;
+    const mobileSpeed = isMobile.current ? speed * 0.5 : speed;
+    const mobileTargetFPS = isMobile.current ? 30 : 60;
+    const enableMouse = isMobile.current ? false : mouseInteraction;
 
     // Intersection Observer for performance optimization
     const observer = new IntersectionObserver(
@@ -237,7 +253,7 @@ const Galaxy = memo(function Galaxy({
     const renderer = new Renderer({
       alpha: transparent,
       premultipliedAlpha: false,
-      powerPreference: 'high-performance',
+      powerPreference: isMobile.current ? 'low-power' : 'high-performance',
       antialias: false, // Disable for better performance
       stencil: false,
       depth: false,
@@ -255,7 +271,8 @@ const Galaxy = memo(function Galaxy({
     const programHolder: { current?: Program } = {};
 
     function resize() {
-      const scale = 1;
+      // Lower resolution on mobile for performance
+      const scale = isMobile.current ? 0.75 : 1;
       renderer.setSize(ctn.offsetWidth * scale, ctn.offsetHeight * scale);
       if (programHolder.current) {
         programHolder.current.uniforms.uResolution.value = new Color(
@@ -280,17 +297,17 @@ const Galaxy = memo(function Galaxy({
         uFocal: { value: new Float32Array(focal) },
         uRotation: { value: new Float32Array(rotation) },
         uStarSpeed: { value: starSpeed },
-        uDensity: { value: density },
+        uDensity: { value: mobileDensity },
         uHueShift: { value: hueShift },
-        uSpeed: { value: speed },
+        uSpeed: { value: mobileSpeed },
         uMouse: {
           value: new Float32Array([smoothMousePos.current.x, smoothMousePos.current.y])
         },
-        uGlowIntensity: { value: glowIntensity },
+        uGlowIntensity: { value: isMobile.current ? glowIntensity * 0.7 : glowIntensity },
         uSaturation: { value: saturation },
         uMouseRepulsion: { value: mouseRepulsion },
-        uTwinkleIntensity: { value: twinkleIntensity },
-        uRotationSpeed: { value: rotationSpeed },
+        uTwinkleIntensity: { value: isMobile.current ? twinkleIntensity * 0.5 : twinkleIntensity },
+        uRotationSpeed: { value: isMobile.current ? rotationSpeed * 0.5 : rotationSpeed },
         uRepulsionStrength: { value: repulsionStrength },
         uMouseActiveFactor: { value: 0.0 },
         uAutoCenterRepulsion: { value: autoCenterRepulsion },
@@ -301,7 +318,7 @@ const Galaxy = memo(function Galaxy({
     programHolder.current = program;
     const mesh = new Mesh(gl, { geometry, program });
     let lastTime = 0;
-    const targetFPS = 60;
+    const targetFPS = mobileTargetFPS;
     const frameInterval = 1000 / targetFPS;
 
     function update(t: number) {
@@ -353,7 +370,7 @@ const Galaxy = memo(function Galaxy({
       targetMouseActive.current = 0.0;
     }
 
-    if (mouseInteraction) {
+    if (enableMouse) {
       // Listen globally so the background remains interactive even if pointer events are disabled
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseout', handleMouseLeave);
@@ -365,7 +382,7 @@ const Galaxy = memo(function Galaxy({
         cancelAnimationFrame(rafId.current);
       }
       window.removeEventListener('resize', resize);
-      if (mouseInteraction) {
+      if (enableMouse) {
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('mouseout', handleMouseLeave);
       }
